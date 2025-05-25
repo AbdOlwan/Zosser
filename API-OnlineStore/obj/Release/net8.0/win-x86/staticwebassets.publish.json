@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "XANw3jS1qBfmzB9MIbAi0L5Esah3pguYPuFYWWFrUds=",
+  "Source": "API-OnlineStore",
+  "BasePath": "_content/API-OnlineStore",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

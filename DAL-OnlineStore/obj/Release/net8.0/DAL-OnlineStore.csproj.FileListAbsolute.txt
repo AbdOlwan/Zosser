@@ -1,0 +1,14 @@
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\bin\Release\net8.0\DAL-OnlineStore.deps.json
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\bin\Release\net8.0\DAL-OnlineStore.runtimeconfig.json
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\bin\Release\net8.0\DAL-OnlineStore.dll
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\bin\Release\net8.0\DAL-OnlineStore.pdb
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Release\net8.0\DAL-OnlineStore.csproj.AssemblyReference.cache
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Release\net8.0\DAL-OnlineStore.GeneratedMSBuildEditorConfig.editorconfig
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Release\net8.0\DAL-OnlineStore.AssemblyInfoInputs.cache
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Release\net8.0\DAL-OnlineStore.AssemblyInfo.cs
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Release\net8.0\DAL-OnlineStore.csproj.CoreCompileInputs.cache
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Release\net8.0\DAL-OnlineStore.dll
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Release\net8.0\refint\DAL-OnlineStore.dll
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Release\net8.0\DAL-OnlineStore.pdb
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Release\net8.0\DAL-OnlineStore.genruntimeconfig.cache
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Release\net8.0\ref\DAL-OnlineStore.dll

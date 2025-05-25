@@ -1,0 +1,28 @@
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.csproj.AssemblyReference.cache
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.GeneratedMSBuildEditorConfig.editorconfig
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.AssemblyInfoInputs.cache
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.AssemblyInfo.cs
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.csproj.CoreCompileInputs.cache
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\bin\Debug\net8.0\DAL-OnlineStore.deps.json
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\bin\Debug\net8.0\DAL-OnlineStore.runtimeconfig.json
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\bin\Debug\net8.0\DAL-OnlineStore.dll
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\bin\Debug\net8.0\DAL-OnlineStore.pdb
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.dll
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Debug\net8.0\refint\DAL-OnlineStore.dll
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.pdb
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.genruntimeconfig.cache
+D:\Work\Projects\Online Store\Back-end\ProjectCode\DAL-OnlineStore\obj\Debug\net8.0\ref\DAL-OnlineStore.dll
+D:\Work\To-Git\Zosser\DAL-OnlineStore\bin\Debug\net8.0\DAL-OnlineStore.deps.json
+D:\Work\To-Git\Zosser\DAL-OnlineStore\bin\Debug\net8.0\DAL-OnlineStore.runtimeconfig.json
+D:\Work\To-Git\Zosser\DAL-OnlineStore\bin\Debug\net8.0\DAL-OnlineStore.dll
+D:\Work\To-Git\Zosser\DAL-OnlineStore\bin\Debug\net8.0\DAL-OnlineStore.pdb
+D:\Work\To-Git\Zosser\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.csproj.AssemblyReference.cache
+D:\Work\To-Git\Zosser\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.GeneratedMSBuildEditorConfig.editorconfig
+D:\Work\To-Git\Zosser\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.AssemblyInfoInputs.cache
+D:\Work\To-Git\Zosser\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.AssemblyInfo.cs
+D:\Work\To-Git\Zosser\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.csproj.CoreCompileInputs.cache
+D:\Work\To-Git\Zosser\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.dll
+D:\Work\To-Git\Zosser\DAL-OnlineStore\obj\Debug\net8.0\refint\DAL-OnlineStore.dll
+D:\Work\To-Git\Zosser\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.pdb
+D:\Work\To-Git\Zosser\DAL-OnlineStore\obj\Debug\net8.0\DAL-OnlineStore.genruntimeconfig.cache
+D:\Work\To-Git\Zosser\DAL-OnlineStore\obj\Debug\net8.0\ref\DAL-OnlineStore.dll
