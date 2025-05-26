@@ -27,7 +27,34 @@ namespace DAL_OnlineStore.Configurations.EnititesConfig.PeopleConfig
             b.Property(p => p.CreatedAt)
              .HasDefaultValueSql("getutcdate()");
 
+            // Optional Input Data
+            b.Property(p => p.Email)
+             .HasMaxLength(320) 
+             .IsRequired(false);
 
+            b.Property(p => p.FirstName)
+             .HasColumnType("NVARCHAR")
+             .HasMaxLength(50)
+             .IsUnicode(true)
+             .IsRequired(false);
+
+            b.Property(p => p.LastName)
+             .HasColumnType("NVARCHAR")
+             .HasMaxLength(50)
+             .IsUnicode(true)
+             .IsRequired(false);
+
+            b.Property(p => p.Gender)
+             .HasMaxLength(1)
+             .IsRequired(false);
+
+            b.Property(p => p.DateOfBirth)
+                .HasColumnType("date")
+                .IsRequired(false);
+
+            b.Property(p => p.IsActive)
+                .HasDefaultValue(true)
+                .IsRequired();
 
             b.HasOne(p => p.User)
              .WithOne(u => u.Person!)

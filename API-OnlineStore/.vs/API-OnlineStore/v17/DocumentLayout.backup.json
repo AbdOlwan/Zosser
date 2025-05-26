@@ -1,0 +1,194 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Work\\To-Git\\Zosser\\DAL-OnlineStore\\Migrations\\20250526082345_Edit-Register-and-Person-Info.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\people_controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\people_controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A628619-F936-4E5F-BB1D-B33732FC6828}|..\\BLL-OnlineStore\\BLL-OnlineStore.csproj|d:\\work\\to-git\\zosser\\bll-onlinestore\\mapping\\personprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A628619-F936-4E5F-BB1D-B33732FC6828}|..\\BLL-OnlineStore\\BLL-OnlineStore.csproj|d:\\work\\to-git\\zosser\\bll-onlinestore\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A628619-F936-4E5F-BB1D-B33732FC6828}|..\\BLL-OnlineStore\\BLL-OnlineStore.csproj|d:\\work\\to-git\\zosser\\bll-onlinestore\\dtos\\entitiesdtos\\people_f\\persondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A628619-F936-4E5F-BB1D-B33732FC6828}|..\\BLL-OnlineStore\\BLL-OnlineStore.csproj|d:\\work\\to-git\\zosser\\bll-onlinestore\\dtos\\userdtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E0F3128-4B82-4732-82E4-7B9A56CAD669}|..\\DAL-OnlineStore\\DAL-OnlineStore.csproj|d:\\work\\to-git\\zosser\\dal-onlinestore\\repositories\\implementations\\peoplerepository\\personrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E0F3128-4B82-4732-82E4-7B9A56CAD669}|..\\DAL-OnlineStore\\DAL-OnlineStore.csproj|d:\\work\\to-git\\zosser\\dal-onlinestore\\entities\\models\\people\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E0F3128-4B82-4732-82E4-7B9A56CAD669}|..\\DAL-OnlineStore\\DAL-OnlineStore.csproj|d:\\work\\to-git\\zosser\\dal-onlinestore\\configurations\\enititesconfig\\peopleconfig\\personconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20250526082345_Edit-Register-and-Person-Info.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\DAL-OnlineStore\\Migrations\\20250526082345_Edit-Register-and-Person-Info.cs",
+              "RelativeDocumentMoniker": "..\\DAL-OnlineStore\\Migrations\\20250526082345_Edit-Register-and-Person-Info.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\DAL-OnlineStore\\Migrations\\20250526082345_Edit-Register-and-Person-Info.cs",
+              "RelativeToolTip": "..\\DAL-OnlineStore\\Migrations\\20250526082345_Edit-Register-and-Person-Info.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-26T08:23:45.443Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\People_Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "Controllers\\People_Controllers\\CustomerController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\People_Controllers\\CustomerController.cs",
+              "RelativeToolTip": "Controllers\\People_Controllers\\CustomerController.cs",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-26T08:22:17.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-26T08:21:53.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PersonProfile.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\BLL-OnlineStore\\Mapping\\PersonProfile.cs",
+              "RelativeDocumentMoniker": "..\\BLL-OnlineStore\\Mapping\\PersonProfile.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\BLL-OnlineStore\\Mapping\\PersonProfile.cs",
+              "RelativeToolTip": "..\\BLL-OnlineStore\\Mapping\\PersonProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-26T08:21:07.374Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\BLL-OnlineStore\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "..\\BLL-OnlineStore\\Services\\AuthService.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\BLL-OnlineStore\\Services\\AuthService.cs",
+              "RelativeToolTip": "..\\BLL-OnlineStore\\Services\\AuthService.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAAwDwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-26T08:17:58.259Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RegisterDTO.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\BLL-OnlineStore\\DTOs\\UserDTOs\\RegisterDTO.cs",
+              "RelativeDocumentMoniker": "..\\BLL-OnlineStore\\DTOs\\UserDTOs\\RegisterDTO.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\BLL-OnlineStore\\DTOs\\UserDTOs\\RegisterDTO.cs",
+              "RelativeToolTip": "..\\BLL-OnlineStore\\DTOs\\UserDTOs\\RegisterDTO.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAA/wCEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-26T08:16:44.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PersonDTO.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\BLL-OnlineStore\\DTOs\\EntitiesDTOs\\People_F\\PersonDTO.cs",
+              "RelativeDocumentMoniker": "..\\BLL-OnlineStore\\DTOs\\EntitiesDTOs\\People_F\\PersonDTO.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\BLL-OnlineStore\\DTOs\\EntitiesDTOs\\People_F\\PersonDTO.cs",
+              "RelativeToolTip": "..\\BLL-OnlineStore\\DTOs\\EntitiesDTOs\\People_F\\PersonDTO.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-26T08:14:40.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PersonRepo.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\DAL-OnlineStore\\Repositories\\Implementations\\PeopleRepository\\PersonRepo.cs",
+              "RelativeDocumentMoniker": "..\\DAL-OnlineStore\\Repositories\\Implementations\\PeopleRepository\\PersonRepo.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\DAL-OnlineStore\\Repositories\\Implementations\\PeopleRepository\\PersonRepo.cs",
+              "RelativeToolTip": "..\\DAL-OnlineStore\\Repositories\\Implementations\\PeopleRepository\\PersonRepo.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-26T08:14:19.972Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PersonConfiguration.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\DAL-OnlineStore\\Configurations\\EnititesConfig\\PeopleConfig\\PersonConfiguration.cs",
+              "RelativeDocumentMoniker": "..\\DAL-OnlineStore\\Configurations\\EnititesConfig\\PeopleConfig\\PersonConfiguration.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\DAL-OnlineStore\\Configurations\\EnititesConfig\\PeopleConfig\\PersonConfiguration.cs",
+              "RelativeToolTip": "..\\DAL-OnlineStore\\Configurations\\EnititesConfig\\PeopleConfig\\PersonConfiguration.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T18:14:25.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Person.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\DAL-OnlineStore\\Entities\\Models\\People\\Person.cs",
+              "RelativeDocumentMoniker": "..\\DAL-OnlineStore\\Entities\\Models\\People\\Person.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\DAL-OnlineStore\\Entities\\Models\\People\\Person.cs",
+              "RelativeToolTip": "..\\DAL-OnlineStore\\Entities\\Models\\People\\Person.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAywBMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-25T18:11:26.766Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

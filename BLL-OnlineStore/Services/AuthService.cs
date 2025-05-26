@@ -58,10 +58,19 @@ namespace BLL_OnlineStore.Services
                                 .FindPersonByPhonNumber(model.PhoneNumber);
             if(person == null)
             {
-                 await _personServices.AddNewPerson(new PersonDTO
+
+
+                await _personServices.AddNewPerson(new PersonDTO
                 {
 
-                    PhoneNumber = model.PhoneNumber
+                    PhoneNumber = model.PhoneNumber,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Gender = model.Gender,
+                    DateOfBirth = model.DateOfBirth,
+                    IsActive    = model.IsActive,
+
                 });
                 
             }

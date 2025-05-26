@@ -11,8 +11,15 @@ namespace BLL_OnlineStore.DTOs.EntitiesDTOs.People_F
     {
         public int PersonId { get; set; }
         [Required]
-        [RegularExpression(@"^(010|011|012|015)[0-9]{8}$",
- ErrorMessage = "الرجاء إدخال رقم هاتف مصري صالح مثلاً 01132563254")]
+        [RegularExpression(@"^(010|011|012|015)[0-9]{8}$",ErrorMessage = "الرجاء إدخال رقم هاتف مصري صالح مثلاً 01000000001")]
         public string PhoneNumber { get; set; } = null!;
+
+        // Optional Input Data
+        public string? Email { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public char? Gender { get; set; }
+        public DateOnly? DateOfBirth { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }

@@ -17,7 +17,13 @@ namespace DAL_OnlineStore.Entities.Models.People
         public string PhoneNumber { get; set; } = null!;
         public DateTime CreatedAt { get; set; }    // audit
 
-
+        // Optional Input Data
+        public string? Email { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public char? Gender { get; set; }
+        public DateOnly? DateOfBirth { get; set; }
+        public bool IsActive { get; set; } = true;
 
 
 
@@ -25,7 +31,8 @@ namespace DAL_OnlineStore.Entities.Models.People
         public ApplicationUser? User { get; set; }
             public Customer? Customer { get; set; }
         }
-}
+
+    }
 
 
 

@@ -530,3 +530,4 @@ D:\Work\To-Git\Zosser\API-OnlineStore\obj\Debug\net8.0\refint\API-OnlineStore.dl
 D:\Work\To-Git\Zosser\API-OnlineStore\obj\Debug\net8.0\API-OnlineStore.pdb
 D:\Work\To-Git\Zosser\API-OnlineStore\obj\Debug\net8.0\API-OnlineStore.genruntimeconfig.cache
 D:\Work\To-Git\Zosser\API-OnlineStore\obj\Debug\net8.0\ref\API-OnlineStore.dll
+D:\Work\To-Git\Zosser\API-OnlineStore\obj\Debug\net8.0\API-OnlineStore.sourcelink.json
