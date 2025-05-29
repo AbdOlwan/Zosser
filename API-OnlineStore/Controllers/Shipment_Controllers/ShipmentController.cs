@@ -1,5 +1,4 @@
 ﻿using API_OnlineStore.Common;
-using API_OnlineStore.Helpers;
 using BLL_OnlineStore.DTOs.EntitiesDTOs.Cart_F;
 using BLL_OnlineStore.DTOs.EntitiesDTOs.Shipment_F;
 using BLL_OnlineStore.Interfaces.ShipmentBusServices;
@@ -13,10 +12,9 @@ namespace API_OnlineStore.Controllers.Shipment_Controllers
 {
     [ApiController]
     [Route("api/v1/shipments")]
-    public class ShipmentsController : ControllerBase
+    public class ShipmentsController(IShipmentService service) : ControllerBase
     {
-        private readonly IShipmentService _service;
-        public ShipmentsController(IShipmentService service) => _service = service;
+        private readonly IShipmentService _service = service;
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ShipmentDTO>>> GetAll() => Ok(await _service.GetAllShipmentsAsync());

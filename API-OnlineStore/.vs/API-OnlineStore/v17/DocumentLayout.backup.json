@@ -1,0 +1,322 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\product_controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\product_controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\product_controllers\\brandcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\product_controllers\\brandcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A628619-F936-4E5F-BB1D-B33732FC6828}|..\\BLL-OnlineStore\\BLL-OnlineStore.csproj|d:\\work\\to-git\\zosser\\bll-onlinestore\\mapping\\product-profiles\\brandprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\api-onlinestore.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:api-onlinestore.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\common\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:common\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\shipment_controllers\\carriercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\shipment_controllers\\carriercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\product_controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\product_controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\order_controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\order_controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\review_controllers\\reviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\review_controllers\\reviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\people_controllers\\customeraddresscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\people_controllers\\customeraddresscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\payment_controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\payment_controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\order_controllers\\orderitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\order_controllers\\orderitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\middleware\\languagemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:middleware\\languagemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\shipment_controllers\\shipmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\shipment_controllers\\shipmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\people_controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\people_controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\cart_controllers\\cartitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\cart_controllers\\cartitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\cart_controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\cart_controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|d:\\work\\to-git\\zosser\\api-onlinestore\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB2DF2E3-68EC-4BA8-946B-1FDF6034DC6D}|API-OnlineStore.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Product_Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Product_Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Product_Controllers\\CategoryController.cs",
+              "RelativeToolTip": "Controllers\\Product_Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T16:00:20.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BrandController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Product_Controllers\\BrandController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Product_Controllers\\BrandController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Product_Controllers\\BrandController.cs",
+              "RelativeToolTip": "Controllers\\Product_Controllers\\BrandController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T16:00:13.583Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BrandProfile.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\BLL-OnlineStore\\Mapping\\Product-Profiles\\BrandProfile.cs",
+              "RelativeDocumentMoniker": "..\\BLL-OnlineStore\\Mapping\\Product-Profiles\\BrandProfile.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\BLL-OnlineStore\\Mapping\\Product-Profiles\\BrandProfile.cs",
+              "RelativeToolTip": "..\\BLL-OnlineStore\\Mapping\\Product-Profiles\\BrandProfile.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAD4vxUAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T15:58:11.474Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "API-OnlineStore.csproj",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\API-OnlineStore.csproj",
+              "RelativeDocumentMoniker": "API-OnlineStore.csproj",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\API-OnlineStore.csproj",
+              "RelativeToolTip": "API-OnlineStore.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-29T15:58:08.71Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CarrierController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Shipment_Controllers\\CarrierController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Shipment_Controllers\\CarrierController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Shipment_Controllers\\CarrierController.cs",
+              "RelativeToolTip": "Controllers\\Shipment_Controllers\\CarrierController.cs",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAkwH8AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T15:55:53.82Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ReviewController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Review_Controllers\\ReviewController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Review_Controllers\\ReviewController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Review_Controllers\\ReviewController.cs",
+              "RelativeToolTip": "Controllers\\Review_Controllers\\ReviewController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T15:55:48.831Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CustomerAddressController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\People_Controllers\\CustomerAddressController.cs",
+              "RelativeDocumentMoniker": "Controllers\\People_Controllers\\CustomerAddressController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\People_Controllers\\CustomerAddressController.cs",
+              "RelativeToolTip": "Controllers\\People_Controllers\\CustomerAddressController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T15:55:43.1Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Product_Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Product_Controllers\\ProductController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Product_Controllers\\ProductController.cs",
+              "RelativeToolTip": "Controllers\\Product_Controllers\\ProductController.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAkwAUAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T15:55:39.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PaymentController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Payment_Controllers\\PaymentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Payment_Controllers\\PaymentController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Payment_Controllers\\PaymentController.cs",
+              "RelativeToolTip": "Controllers\\Payment_Controllers\\PaymentController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T15:55:35.985Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "OrderItemController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Order_Controllers\\OrderItemController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Order_Controllers\\OrderItemController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Order_Controllers\\OrderItemController.cs",
+              "RelativeToolTip": "Controllers\\Order_Controllers\\OrderItemController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T15:55:32.101Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Order_Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Order_Controllers\\OrderController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Order_Controllers\\OrderController.cs",
+              "RelativeToolTip": "Controllers\\Order_Controllers\\OrderController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T15:55:25.535Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ApiResponse.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Common\\ApiResponse.cs",
+              "RelativeDocumentMoniker": "Common\\ApiResponse.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Common\\ApiResponse.cs",
+              "RelativeToolTip": "Common\\ApiResponse.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA6wDoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T12:30:39.036Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CartItemController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Cart_Controllers\\CartItemController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Cart_Controllers\\CartItemController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Cart_Controllers\\CartItemController.cs",
+              "RelativeToolTip": "Controllers\\Cart_Controllers\\CartItemController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAuwA4AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T14:31:32.878Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Cart_Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Cart_Controllers\\CartController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Cart_Controllers\\CartController.cs",
+              "RelativeToolTip": "Controllers\\Cart_Controllers\\CartController.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAuwA0AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T14:25:46.571Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\People_Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "Controllers\\People_Controllers\\CustomerController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\People_Controllers\\CustomerController.cs",
+              "RelativeToolTip": "Controllers\\People_Controllers\\CustomerController.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAuwBAAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T14:17:00.749Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ShipmentController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Shipment_Controllers\\ShipmentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Shipment_Controllers\\ShipmentController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\Shipment_Controllers\\ShipmentController.cs",
+              "RelativeToolTip": "Controllers\\Shipment_Controllers\\ShipmentController.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAuwBAAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T12:32:12.158Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAuwA8AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T12:29:58.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LanguageMiddleware.cs",
+              "DocumentMoniker": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Middleware\\LanguageMiddleware.cs",
+              "RelativeDocumentMoniker": "Middleware\\LanguageMiddleware.cs",
+              "ToolTip": "D:\\Work\\To-Git\\Zosser\\API-OnlineStore\\Middleware\\LanguageMiddleware.cs",
+              "RelativeToolTip": "Middleware\\LanguageMiddleware.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-29T12:29:36.156Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

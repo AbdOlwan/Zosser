@@ -7,6 +7,8 @@ using DAL_OnlineStore.Entities.Models.ShipmentModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace API_OnlineStore.Controllers.Shipment_Controllers
 {
@@ -30,33 +32,20 @@ namespace API_OnlineStore.Controllers.Shipment_Controllers
         public async Task<ActionResult<IEnumerable<CarrierDTO>>> GetAllCarriersAsync()
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
+
             try
             {
-                var Carriers = await _service.GetAllCarriers();
-                if (Carriers == null || Carriers.Count == 0)
+                var carier = await _service.GetAllCarriers();
+                if (carier == null || !carier.Any())
                 {
-                    return NotFound(new ApiResponse<IEnumerable<CarrierDTO>>
-                    {
-                        Success = false,
-                        Message = $" No Carriers found.",
-                        Errors = ["Empty result"]
-                    });
-
-
+                    return NotFound(new ApiResponse(400, "No Carriers Found"));
                 }
-                return Ok(new ApiResponse<IEnumerable<CarrierDTO>>
-                {
-                    Success = true,
-                    Message = "Carriers retrieved successfully",
-                    Data = Carriers
-                });
-
+                return Ok(new ApiResponse(200, carier));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while retrieving Carriers.");
-
+                return StatusCode(500, new ApiResponse(500, $"An error occurred while retrieving Carriers: {ex.Message}"));
             }
 
         }
@@ -74,25 +63,16 @@ namespace API_OnlineStore.Controllers.Shipment_Controllers
         public async Task<ActionResult<CarrierDTO>> GetCarrierByIdAsync(int id)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
 
             var result = await _service.GetCarrierById(id);
             if (result == null)
             {
-                return BadRequest(new ApiResponse<IEnumerable<CarrierDTO>>
-                {
-                    Success = false,
-                    Message = $"There is no Carrier With Id {id}",
-                    Errors = ["Empty result"]
-                });
-            }
+                return NotFound(new ApiResponse(400, "No Carriers Found"));
 
-            return Ok(new ApiResponse<CarrierDTO>
-            {
-                Success = true,
-                Message = "Carriers retrieved successfully",
-                Data = result
-            });
+            }
+            return Ok(new ApiResponse(200, result));
+
         }
 
         // =================================================
@@ -104,35 +84,22 @@ namespace API_OnlineStore.Controllers.Shipment_Controllers
         public async Task<ActionResult<CarrierDTO>> AddNewCarrierAsync([FromBody] CarrierDTO Carrier)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
             // أولًا: التحقق من أن الكائن نفسه وبياناته الأساسية موجودة
             if (Carrier == null || string.IsNullOrEmpty(Carrier.Name))
             {
-                return BadRequest(new ApiResponse<IEnumerable<CarrierDTO>>
-                {
-                    Success = false,
-                    Message = $"Not Accepted: Carrier data is missing or Name is empty.",
-                    Errors = ["Empty result"]
-                });
+                return BadRequest(new ApiResponse(400, "Bad Request"));
+
             }
             //var PhoneNum = newDoctor.Phone.Trim().ToString();
 
             var NewCarrier = await _service.AddNewCarrier(Carrier);
             if (NewCarrier == null)
             {
-                return BadRequest(new ApiResponse<IEnumerable<CarrierDTO>>
-                {
-                    Success = false,
-                    Message = $"Carrier Not Added",
-                    Errors = ["Empty result"]
-                });
+                return BadRequest(new ApiResponse(400, "Bad Request"));
+
             }
-            return Ok(new ApiResponse<CarrierDTO>
-            {
-                Success = true,
-                Message = "Carrier Added successfully",
-                Data = NewCarrier
-            });
+            return Ok(new ApiResponse(200, NewCarrier));
         }
 
 
@@ -147,24 +114,14 @@ namespace API_OnlineStore.Controllers.Shipment_Controllers
         public async Task<ActionResult<string>> UpdateCarrierByIdAsync(CarrierDTO Carrier)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
 
             var result = await _service.UpdateCarrierById(Carrier);
             if (!result)
             {
-                return BadRequest(new ApiResponse<IEnumerable<CarrierDTO>>
-                {
-                    Success = false,
-                    Message = $"Sorry Carrier Didnot Updated!!",
-                    Errors = ["Empty result"]
-                });
+                return BadRequest(new ApiResponse(400, "Bad Request"));
             }
-            return Ok(new ApiResponse<CarrierDTO>
-            {
-                Success = true,
-                Message = "Carrier Updated Successfully",
-                Data = Carrier
-            });
+            return Ok(new ApiResponse(200, result));
         }
 
         // =================================================
@@ -178,24 +135,14 @@ namespace API_OnlineStore.Controllers.Shipment_Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<string>> DeleteCarrierByIdAsync(int id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+
 
             var result = await _service.DeleteCarrierById(id);
             if (!result)
-                 return BadRequest(new ApiResponse<IEnumerable<CarrierDTO>>
-                 {
-                     Success = false,
-                     Message = $"Sorry Carrier Didnot Deleted! Please Try Again!!",
-                     Errors = ["Empty result"]
-                 });
+                return BadRequest(new ApiResponse(400, "Bad Request"));
 
-            return Ok(new ApiResponse<CarrierDTO>
-            {
-                Success = true,
-                Message = $"Carrier With Id {id} Deleted Successfully",
-                Data = null
-            });
+            return Ok(new ApiResponse(200, result));
+
         }
     }
 }

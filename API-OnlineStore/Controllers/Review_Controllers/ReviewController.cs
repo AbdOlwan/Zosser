@@ -30,25 +30,17 @@ namespace API_OnlineStore.Controllers.Review_Controllers
         public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetAllReviewsAsync()
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
             try
             {
                 var Reviews = await _service.GetAllReviews();
                 if (Reviews == null || Reviews.Count == 0)
                 {
-                    return NotFound(new ApiResponse<IEnumerable<ReviewDTO>>
-                    {
-                        Success = false,
-                        Message = $"No Reviews found.",
-                        Errors = ["Empty result"]
-                    });
+                    return NotFound(new ApiResponse(400, "No Reviews Found"));
+
                 }
-                return Ok(new ApiResponse<IEnumerable<ReviewDTO>>
-                {
-                    Success = true,
-                    Message = " retrieved successfully",
-                    Data = Reviews
-                });
+                return Ok(new ApiResponse(200, Reviews));
+
             }
             catch (Exception)
             {
@@ -66,25 +58,17 @@ namespace API_OnlineStore.Controllers.Review_Controllers
         public async Task<ActionResult<ReviewDTO>> GetReviewByIdAsync(int id)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
 
             var result = await _service.GetReviewById(id);
             if (result == null)
             {
-                return BadRequest(new ApiResponse<IEnumerable<ReviewDTO>>
-                {
-                    Success = false,
-                    Message = $"There is no Review With Id {id}.",
-                    Errors = ["Empty result"]
-                });
+                return NotFound(new ApiResponse(400, "No Carriers Found"));
+
             }
 
-            return Ok(new ApiResponse<ReviewDTO>
-            {
-                Success = true,
-                Message = " retrieved successfully",
-                Data = result
-            });
+            return Ok(new ApiResponse(200, result));
+
         }
 
         // =================================================
@@ -96,35 +80,22 @@ namespace API_OnlineStore.Controllers.Review_Controllers
         public async Task<ActionResult<ReviewDTO>> AddNewReviewAsync([FromBody] ReviewDTO Review)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
             // أولًا: التحقق من أن الكائن نفسه وبياناته الأساسية موجودة
             if (Review == null)
             {
-                return BadRequest(new ApiResponse<IEnumerable<ReviewDTO>>
-                {
-                    Success = false,
-                    Message = $"Not Accepted: Review data is missing or Name is empty.",
-                    Errors = ["Empty result"]
-                });
+                return NotFound(new ApiResponse(400, "No Review Found"));
             }
             //var PhoneNum = newDoctor.Phone.Trim().ToString();
 
             var NewReview = await _service.AddNewReview(Review);
             if (NewReview == null)
             {
-                return BadRequest(new ApiResponse<IEnumerable<ReviewDTO>>
-                {
-                    Success = false,
-                    Message = $"Review Not Added",
-                    Errors = ["Empty result"]
-                });
+                return BadRequest(new ApiResponse(400, "No Review Added"));
+
             }
-            return Ok(new ApiResponse<ReviewDTO>
-            {
-                Success = true,
-                Message = " retrieved successfully",
-                Data = NewReview
-            });
+
+            return Ok(new ApiResponse(200, NewReview));
         }
 
         // =================================================
@@ -138,24 +109,16 @@ namespace API_OnlineStore.Controllers.Review_Controllers
         public async Task<ActionResult<string>> UpdateReviewByIdAsync(ReviewDTO Review)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
 
             var result = await _service.UpdateReviewById(Review);
             if (!result)
             {
-                return BadRequest(new ApiResponse<IEnumerable<ReviewDTO>>
-                {
-                    Success = false,
-                    Message = $"Sorry Review Didnot Updated!!",
-                    Errors = ["Empty result"]
-                });
+                return BadRequest(new ApiResponse(400, "No Review Updated"));
+
             }
-            return Ok(new ApiResponse<ReviewDTO>
-            {
-                Success = true,
-                Message = "Review Updated Successfully",
-                Data = Review
-            });
+            return Ok(new ApiResponse(200, result));
+
         }
 
         // =================================================
@@ -169,24 +132,15 @@ namespace API_OnlineStore.Controllers.Review_Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<string>> DeleteReviewByIdAsync(int id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+
 
             var result = await _service.DeleteReviewById(id);
             if (!result)
-                return BadRequest(new ApiResponse<IEnumerable<ReviewDTO>>
-                {
-                    Success = false,
-                    Message = $"Sorry Review Didnot Deleted! Please Try Again!!",
-                    Errors = ["Empty result"]
-                });
+                return BadRequest(new ApiResponse(400, "No Review Deleted"));
 
-            return Ok(new ApiResponse<ReviewDTO>
-            {
-                Success = true,
-                Message = $"Review With Id {id} Deleted Successfully",
-                Data = null
-            });
+
+            return Ok(new ApiResponse(200, result));
+
         }
 
     }

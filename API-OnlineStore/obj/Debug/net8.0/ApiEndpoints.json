@@ -444,7 +444,7 @@
     ]
   },
   {
-    "ContainingType": "API_OnlineStore.Controllers.CartItem_Controllers.CartItemController",
+    "ContainingType": "API_OnlineStore.Controllers.Cart_Controllers.CartItemController",
     "Method": "GetAllCartItemsAsync",
     "RelativePath": "api/v1/cartItems",
     "HttpMethod": "GET",
@@ -473,7 +473,7 @@
     ]
   },
   {
-    "ContainingType": "API_OnlineStore.Controllers.CartItem_Controllers.CartItemController",
+    "ContainingType": "API_OnlineStore.Controllers.Cart_Controllers.CartItemController",
     "Method": "AddNewCartItemAsync",
     "RelativePath": "api/v1/cartItems",
     "HttpMethod": "POST",
@@ -508,7 +508,7 @@
     ]
   },
   {
-    "ContainingType": "API_OnlineStore.Controllers.CartItem_Controllers.CartItemController",
+    "ContainingType": "API_OnlineStore.Controllers.Cart_Controllers.CartItemController",
     "Method": "UpdateCartItemByIdAsync",
     "RelativePath": "api/v1/cartItems",
     "HttpMethod": "PUT",
@@ -552,7 +552,7 @@
     ]
   },
   {
-    "ContainingType": "API_OnlineStore.Controllers.CartItem_Controllers.CartItemController",
+    "ContainingType": "API_OnlineStore.Controllers.Cart_Controllers.CartItemController",
     "Method": "GetCartItemByIdAsync",
     "RelativePath": "api/v1/cartItems/{id}",
     "HttpMethod": "GET",
@@ -596,7 +596,7 @@
     ]
   },
   {
-    "ContainingType": "API_OnlineStore.Controllers.CartItem_Controllers.CartItemController",
+    "ContainingType": "API_OnlineStore.Controllers.Cart_Controllers.CartItemController",
     "Method": "DeleteCartItemByIdAsync",
     "RelativePath": "api/v1/cartItems/{id}",
     "HttpMethod": "DELETE",

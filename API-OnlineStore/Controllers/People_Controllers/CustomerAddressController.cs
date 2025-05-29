@@ -4,6 +4,7 @@ using BLL_OnlineStore.DTOs.EntitiesDTOs.People_F;
 using BLL_OnlineStore.Interfaces.PeopleBusServices;
 using DAL_OnlineStore.Entities.Models.CartModels;
 using DAL_OnlineStore.Entities.Models.People;
+using DAL_OnlineStore.Entities.Models.ReviewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -30,33 +31,20 @@ namespace API_OnlineStore.Controllers.People_Controllers
         public async Task<ActionResult<IEnumerable<CustomerAddressDTO>>> GetAllCustomerAddressesAsync()
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
             try
             {
                 var CustomerAddresses = await _service.GetAllCustomerAddresses();
                 if (CustomerAddresses == null || CustomerAddresses.Count == 0)
                 {
-                    return NotFound(new ApiResponse<IEnumerable<CustomerAddressDTO>>
-                    {
-                        Success = false,
-                        Message = $" No CustomerAddresses found.",
-                        Errors = ["Empty result"]
-                    });
-
+                    return NotFound(new ApiResponse(400, "No CustomerAddresses Found"));
                 }
 
-                return Ok(new ApiResponse<IEnumerable<CustomerAddressDTO>>
-                {
-                    Success = true,
-                    Message = " retrieved successfully",
-                    Data = CustomerAddresses
-                });
-
-
+                return Ok(new ApiResponse(200, CustomerAddresses));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while retrieving CustomerAddresses.");
+                return StatusCode(500, new ApiResponse(500, $"An error occurred while retrieving CustomerAddresses: {ex.Message}"));
 
             }
         }
@@ -72,25 +60,16 @@ namespace API_OnlineStore.Controllers.People_Controllers
         public async Task<ActionResult<CustomerAddressDTO>> GetCustomerAddressByIdAsync(int id)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
 
             var result = await _service.GetCustomerAddressById(id);
             if (result == null)
             {
-                return BadRequest(new ApiResponse<IEnumerable<CustomerAddressDTO>>
-                {
-                    Success = false,
-                    Message = $" There is no CustomerAddress With Id {id}",
-                    Errors = ["Empty result"]
-                });
-            }
+                return NotFound(new ApiResponse(400, "No CustomerAddresses Found"));
 
-            return Ok(new ApiResponse<CustomerAddressDTO>
-            {
-                Success = true,
-                Message = " retrieved successfully",
-                Data = result
-            });
+            }
+            return Ok(new ApiResponse(200, result));
+
         }
 
         // =================================================
@@ -103,35 +82,21 @@ namespace API_OnlineStore.Controllers.People_Controllers
                                                                  CustomerAddressDTO CustomerAddress)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
             // أولًا: التحقق من أن الكائن نفسه وبياناته الأساسية موجودة
             if (CustomerAddress == null)
             {
-                return BadRequest(new ApiResponse<IEnumerable<CustomerAddressDTO>>
-                {
-                    Success = false,
-                    Message = $" Not Accepted: CustomerAddress data is missing or Name is empty.",
-                    Errors = ["Empty result"]
-                });
+                return BadRequest(new ApiResponse(400, " Not Accepted: CustomerAddress data is missing or Name is empty."));
             }
             //var PhoneNum = newDoctor.Phone.Trim().ToString();
 
             var NewCustomerAddress = await _service.AddNewCustomerAddress(CustomerAddress);
             if (NewCustomerAddress == null)
             {
-                return BadRequest(new ApiResponse<IEnumerable<CustomerAddressDTO>>
-                {
-                    Success = false,
-                    Message = $" CustomerAddress Not Added",
-                    Errors = ["Empty result"]
-                });
+                return BadRequest(new ApiResponse(400, " CustomerAddress Not Added."));
+
             }
-            return Ok(new ApiResponse<CustomerAddressDTO>
-            {
-                Success = true,
-                Message = " retrieved successfully",
-                Data = NewCustomerAddress
-            });
+            return Ok(new ApiResponse(200, " Added successfully"));
         }
 
 
@@ -147,27 +112,17 @@ namespace API_OnlineStore.Controllers.People_Controllers
         public async Task<ActionResult<string>> UpdateCustomerAddressByIdAsync(CustomerAddressDTO CustomerAddress)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
 
             var result = await _service.UpdateCustomerAddressById(CustomerAddress);
             if (!result)
             {
-                return BadRequest(new ApiResponse<IEnumerable<CustomerAddressDTO>>
-                {
-                    Success = false,
-                    Message = $" Sorry CustomerAddress Didnot Updated!!",
-                    Errors = ["Empty result"]
-                });
+                return BadRequest(new ApiResponse(400, " Sorry CustomerAddress Didnot Updated!!."));
+
             }
-            return Ok(new ApiResponse<CustomerAddressDTO>
-            {
-                Success = true,
-                Message = "CustomerAddress Updated Successfully",
-                Data = CustomerAddress
-            });
+            return Ok(new ApiResponse(200, " CustomerAddress Updated Successfully"));
+
         }
-
-
 
         // =================================================
         // Delete CustomerAddress By Id: 
@@ -181,23 +136,15 @@ namespace API_OnlineStore.Controllers.People_Controllers
         public async Task<ActionResult<string>> DeleteCustomerAddressByIdAsync(int id)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
 
             var result = await _service.DeleteCustomerAddressById(id);
             if (!result)
-                return BadRequest(new ApiResponse<IEnumerable<CustomerAddressDTO>>
-                {
-                    Success = false,
-                    Message = $" Sorry CustomerAddress Didnot Deleted! Please Try Again!!",
-                    Errors = ["Empty result"]
-                });
+                return BadRequest(new ApiResponse(400, "Sorry CustomerAddress Didnot Deleted! Please Try Again!!"));
 
-            return Ok(new ApiResponse<CustomerAddressDTO>
-            {
-                Success = true,
-                Message = "CustomerAddress With Id {id} Deleted Successfully",
-                Data = null
-            });
+
+            return Ok(new ApiResponse(200, " CustomerAddress With Id {id} Deleted Successfully"));
+
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using API_OnlineStore.Common;
-using API_OnlineStore.Helpers;
 using BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F;
 using BLL_OnlineStore.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -197,6 +196,10 @@ namespace API_OnlineStore.Controllers
                 }
 
                 var createdProduct = await _service.CreateProductAsync(createProductDTO);
+                if (createdProduct == null)
+                {
+                    return NotFound(new ApiResponse(400, "Product Did not Created"));
+                }
                 return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.ProductId }, createdProduct);
             }
             catch (Exception ex)

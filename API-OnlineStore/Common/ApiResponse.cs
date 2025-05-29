@@ -1,17 +1,16 @@
-﻿
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace API_OnlineStore.Helpers
+namespace API_OnlineStore.Common
 {
     public class ApiResponse
     {
         public int StatusCode { get; set; }
         public object? Data { get; set; }
         public bool Success { get; set; }
-        public List<string> Errors { get; set; } = new List<string>();
+        public List<string> Errors { get; set; } = [];
 
         public ApiResponse(int statusCode, string? message = null)
         {

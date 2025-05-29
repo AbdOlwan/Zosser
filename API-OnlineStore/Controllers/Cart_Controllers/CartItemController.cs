@@ -3,20 +3,16 @@ using BLL_OnlineStore.DTOs.EntitiesDTOs.Cart_F;
 using BLL_OnlineStore.Interfaces.CartBusServices;
 using DAL_OnlineStore.Entities.Models.CartModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API_OnlineStore.Controllers.CartItem_Controllers
+namespace API_OnlineStore.Controllers.Cart_Controllers
 {
     [Route("api/v1/cartItems")]
     [ApiController]
-    public class CartItemController : ControllerBase
+    public class CartItemController(ICartItemServices service) : ControllerBase
     {
-        private readonly ICartItemServices _service;
-
-        public CartItemController(ICartItemServices service)
-        {
-            _service = service;
-        }
+        private readonly ICartItemServices _service = service;
 
         // =================================================
         // Get All CartItems : 
@@ -27,35 +23,23 @@ namespace API_OnlineStore.Controllers.CartItem_Controllers
         public async Task<ActionResult<IEnumerable<CartItemDTO>>> GetAllCartItemsAsync()
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
             try
             {
                 var CartItems = await _service.GetAllCartItems();
                 if (CartItems == null || CartItems.Count == 0)
                 {
 
-                    return NotFound(new ApiResponse<IEnumerable<CartItemDTO>>
-                    {
-                        Success = false,
-                        Message = $" cart get success",
-                        Errors = ["Empty result"]
-                    });
+                    return NotFound(new ApiResponse(400, "No cartItems found"));
 
                 }
 
-                return Ok(new ApiResponse<IEnumerable<CartItemDTO>>
-                {
-                    Success = true,
-                    Message = "Cart retrieved successfully",
-                    Data = CartItems
-                });
-
+                return Ok(new ApiResponse(200, "cartItem retrieved successfully"));
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while retrieving Carriers.");
-
+                return StatusCode(500, new ApiResponse(500, $"An error occurred while retrieving cartItem: {ex.Message}"));
             }
 
         }
@@ -75,25 +59,16 @@ namespace API_OnlineStore.Controllers.CartItem_Controllers
         public async Task<ActionResult<CartItemDTO>> GetCartItemByIdAsync(int id)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
 
             var result = await _service.GetCartItemById(id);
             if (result == null)
             {
-                return NotFound(new ApiResponse<IEnumerable<CartItemDTO>>
-                {
-                    Success = false,
-                    Message = $" cartItem With ID{id} Not Found.",
-                    Errors = ["Empty result"]
-                });
+                return NotFound(new ApiResponse(400, $" cartItem With ID{id} Not Found."));
             }
 
-            return Ok(new ApiResponse<CartItemDTO>
-            {
-                Success = true,
-                Message = "CartItem retrieved successfully",
-                Data = result
-            });
+            return Ok(new ApiResponse(200, result));
+
         }
 
 
@@ -106,36 +81,22 @@ namespace API_OnlineStore.Controllers.CartItem_Controllers
         public async Task<ActionResult<CartItemDTO>> AddNewCartItemAsync([FromBody] CartItemDTO CartItem)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
             // أولًا: التحقق من أن الكائن نفسه وبياناته الأساسية موجودة
             if (CartItem == null)
             {
 
-                return NotFound(new ApiResponse<CartItemDTO>
-                {
-                    Success = false,
-                    Message = $" cart With ID{CartItem?.CartItemId} Not Added.",
-                    Errors = ["Empty result"]
-                });
+                return NotFound(new ApiResponse(400, $" cart With ID{CartItem?.CartItemId} Not Added."));
+
             }
             //var PhoneNum = newDoctor.Phone.Trim().ToString();
 
             var NewCartItem = await _service.AddNewCartItem(CartItem);
             if (NewCartItem == null)
             {
-                return NotFound(new ApiResponse<CartItemDTO>
-                {
-                    Success = false,
-                    Message = $" cartItem With ID{CartItem?.CartItemId} Not Added.",
-                    Errors = ["Empty result"]
-                });
+                return NotFound(new ApiResponse(400, $" cartItem With ID{CartItem?.CartItemId} Not Added."));
             }
-            return Ok(new ApiResponse<CartItemDTO>
-            {
-                Success = true,
-                Message = "CartItem Added successfully",
-                Data = NewCartItem
-            });
+            return Ok(new ApiResponse(200, NewCartItem));
         }
 
 
@@ -152,24 +113,15 @@ namespace API_OnlineStore.Controllers.CartItem_Controllers
         public async Task<ActionResult<string>> UpdateCartItemByIdAsync(CartItemDTO CartItem)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
 
             var result = await _service.UpdateCartItemById(CartItem);
             if (!result)
             {
-                return NotFound(new ApiResponse<CartItemDTO>
-                {
-                    Success = false,
-                    Message = $" cart With ID{CartItem.CartItemId} Not Updated.",
-                    Errors = ["Empty result"]
-                });
+                return NotFound(new ApiResponse(400, $" cart With ID{CartItem.CartItemId} Not Updated."));
+
             }
-            return Ok(new ApiResponse<CartItemDTO>
-            {
-                Success = true,
-                Message = $" cart With ID{CartItem.CartItemId}  Updated Successfully.",
-                Data = CartItem
-            });
+            return Ok(new ApiResponse(200, CartItem));
         }
 
 
@@ -184,25 +136,16 @@ namespace API_OnlineStore.Controllers.CartItem_Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<string>> DeleteCartItemByIdAsync(int id)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+
 
             var result = await _service.DeleteCartItemById(id);
             if (!result)
 
-                 return NotFound(new ApiResponse<CartItemDTO>
-                 {
-                     Success = false,
-                     Message = $" Sorry CartItem Didnot Deleted! Please Try Again",
-                     Errors = ["Empty result"]
-                 });
+                return NotFound(new ApiResponse(400, $" Sorry CartItem Didnot Deleted! Please Try Again"));
 
-            return Ok(new ApiResponse<CartDTO>
-            {
-                Success = true,
-                Message = "CartItem  Deleted Successfully",
-                Data = null
-            });
+
+            return Ok(new ApiResponse(200, "CartItem  Deleted Successfully"));
+
         }
 
 

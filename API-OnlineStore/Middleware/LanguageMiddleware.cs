@@ -1,18 +1,13 @@
 ﻿namespace API_OnlineStore.Middleware
 {
-    public class LanguageMiddleware
+    public class LanguageMiddleware(RequestDelegate next)
     {
-        private readonly RequestDelegate _next;
-
-        public LanguageMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
+        private readonly RequestDelegate _next = next;
 
         public async Task InvokeAsync(HttpContext context)
         {
             // Get language from Accept-Language header
-            var acceptLanguage = context.Request.Headers["Accept-Language"].ToString();
+            var acceptLanguage = context.Request.Headers.AcceptLanguage.ToString();
 
             // Set normalized language code for consistent use throughout the application
             string normalizedLanguage = "ar"; // Default to English

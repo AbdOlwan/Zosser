@@ -1,5 +1,4 @@
 ﻿using API_OnlineStore.Common;
-using API_OnlineStore.Helpers;
 using BLL_OnlineStore.DTOs.UserDTOs;
 using BLL_OnlineStore.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -10,14 +9,9 @@ namespace API_OnlineStore.Controllers
 {
     [Route("api/v1/auth")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController(IAuthService authService) : ControllerBase
     {
-        private readonly IAuthService _authService;
-
-        public AuthController(IAuthService authService)
-        {
-            _authService = authService;
-        }
+        private readonly IAuthService _authService = authService;
 
         /// <summary>
         /// Register a new user and return authentication token if successful.
