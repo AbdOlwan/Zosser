@@ -20,7 +20,7 @@ namespace DAL_OnlineStore.Entities.Models.ProductModels
         public int CategoryID { get; set; }
         public string Culture { get; set; } = null!;      // "ar" أو "en"
         public string Category_Name { get; set; } = null!;
-        public Category? category { get; set; }  
+        public Category Category { get; set; }  =null!;
 
     }
 }

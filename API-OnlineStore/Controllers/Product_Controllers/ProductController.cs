@@ -10,11 +10,11 @@ namespace API_OnlineStore.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductService _productService;
+        private readonly IProductService _service;
 
         public ProductsController(IProductService productService)
         {
-            _productService = productService;
+            _service = productService;
         }
 
         /// <summary>
@@ -27,8 +27,8 @@ namespace API_OnlineStore.Controllers
         {
             try
             {
-                var products = await _productService.GetAllProductsAsync(culture);
-                return Ok(products);
+                var products = await _service.GetAllProductsAsync(culture);
+                return Ok(new ApiResponse(200,  products));
             }
             catch (Exception ex)
             {
@@ -47,7 +47,7 @@ namespace API_OnlineStore.Controllers
         {
             try
             {
-                var product = await _productService.GetProductByIdAsync(id, culture);
+                var product = await _service.GetProductByIdAsync(id, culture);
                 if (product == null)
                     return NotFound(new ApiResponse(404, $"Product with ID {id} not found"));
 
@@ -70,7 +70,7 @@ namespace API_OnlineStore.Controllers
         {
             try
             {
-                var product = await _productService.GetProductBySlugAsync(slug, culture);
+                var product = await _service.GetProductBySlugAsync(slug, culture);
                 if (product == null)
                     return NotFound(new ApiResponse(404, $"Product with slug '{slug}' not found"));
 
@@ -93,7 +93,7 @@ namespace API_OnlineStore.Controllers
         {
             try
             {
-                var products = await _productService.GetProductsByCategoryIdAsync(categoryId, culture);
+                var products = await _service.GetProductsByCategoryIdAsync(categoryId, culture);
                 return Ok(products);
             }
             catch (Exception ex)
@@ -113,7 +113,7 @@ namespace API_OnlineStore.Controllers
         {
             try
             {
-                var products = await _productService.GetProductsByBrandIdAsync(brandId, culture);
+                var products = await _service.GetProductsByBrandIdAsync(brandId, culture);
                 return Ok(products);
             }
             catch (Exception ex)
@@ -133,7 +133,7 @@ namespace API_OnlineStore.Controllers
         {
             try
             {
-                var products = await _productService.GetProductsByTypeIdAsync(typeId, culture);
+                var products = await _service.GetProductsByTypeIdAsync(typeId, culture);
                 return Ok(products);
             }
             catch (Exception ex)
@@ -152,7 +152,7 @@ namespace API_OnlineStore.Controllers
         {
             try
             {
-                var product = await _productService.GetProductWithTranslationsAsync(id);
+                var product = await _service.GetProductWithTranslationsAsync(id);
                 if (product == null)
                     return NotFound(new ApiResponse(404, $"Product with ID {id} not found"));
 
@@ -178,7 +178,7 @@ namespace API_OnlineStore.Controllers
             try
             {
                 // Check if a product with the same slug already exists
-                if (await _productService.ProductExistsBySlugAsync(createProductDTO.Slug))
+                if (await _service.ProductExistsBySlugAsync(createProductDTO.Slug))
                     return BadRequest(new ApiResponse(400, $"A product with slug '{createProductDTO.Slug}' already exists"));
 
                 // Explicitly validate that translation fields are provided
@@ -196,7 +196,7 @@ namespace API_OnlineStore.Controllers
                     return BadRequest(new ApiResponse(400, "English translation fields (EnProductName, EnDescription, EnMarketingSlogan) are required"));
                 }
 
-                var createdProduct = await _productService.CreateProductAsync(createProductDTO);
+                var createdProduct = await _service.CreateProductAsync(createProductDTO);
                 return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.ProductId }, createdProduct);
             }
             catch (Exception ex)
@@ -224,15 +224,15 @@ namespace API_OnlineStore.Controllers
             try
             {
                 // Check if the product exists
-                if (!await _productService.ProductExistsAsync(id))
+                if (!await _service.ProductExistsAsync(id))
                     return NotFound(new ApiResponse(404, $"Product with ID {id} not found"));
 
                 // Check if the updated slug conflicts with another product
-                var existingProduct = await _productService.GetProductBySlugAsync(updateProductDTO.Slug);
+                var existingProduct = await _service.GetProductBySlugAsync(updateProductDTO.Slug);
                 if (existingProduct != null && existingProduct.ProductId != id)
                     return BadRequest(new ApiResponse(400, $"A product with slug '{updateProductDTO.Slug}' already exists"));
 
-                await _productService.UpdateProductAsync(updateProductDTO);
+                await _service.UpdateProductAsync(updateProductDTO);
                 return NoContent();
             }
             catch (KeyNotFoundException ex)
@@ -256,10 +256,10 @@ namespace API_OnlineStore.Controllers
             try
             {
                 // Check if the product exists
-                if (!await _productService.ProductExistsAsync(id))
+                if (!await _service.ProductExistsAsync(id))
                     return NotFound(new ApiResponse(404, $"Product with ID {id} not found"));
 
-                await _productService.DeleteProductAsync(id);
+                await _service.DeleteProductAsync(id);
                 return Ok(new ApiResponse<int>
                 {
                     Success = true,
@@ -275,246 +275,3 @@ namespace API_OnlineStore.Controllers
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//using API_OnlineStore.Common;
-//using BLL_OnlineStore.DTOs.EntitiesDTOs.Cart_F;
-//using BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F;
-//using BLL_OnlineStore.Interfaces.ProductBusServices;
-//using BLL_OnlineStore.Services;
-//using BLL_OnlineStore.Services.Interfaces;
-//using DAL_OnlineStore.Entities.Models.CartModels;
-//using DAL_OnlineStore.Entities.Models.ProductModels;
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Http.HttpResults;
-//using Microsoft.AspNetCore.Mvc;
-
-//namespace API_OnlineStore.Controllers.Product_Controllers
-//{
-//    [Route("api/v1/products")]
-//    [ApiController]
-//    public class ProductController : ControllerBase
-//    {
-//        private readonly IProductService _service;
-
-//        public ProductController(ProductService service)
-//        {
-//            _service = service;
-//        }
-//        // Helper method to extract language from request headers
-//        private string GetRequestLanguage()
-//        {
-//            // Get language from Accept-Language header
-//            var acceptLanguage = Request.Headers["Accept-Language"].ToString();
-
-//            // Default to English if no Accept-Language header
-//            if (string.IsNullOrEmpty(acceptLanguage))
-//            {
-//                return "ar";
-//            }
-
-//            // Parse the Accept-Language header to get the preferred language
-//            var languages = acceptLanguage.Split(',');
-//            if (languages.Length > 0)
-//            {
-//                // Get the first language code (highest priority)
-//                var primaryLanguage = languages[0].Split(';')[0].Trim().ToLower();
-
-//                // Check if it starts with 'ar' or 'en' (our supported languages)
-//                if (primaryLanguage.StartsWith("en"))
-//                {
-//                    return "en";
-//                }
-//                else if (primaryLanguage.StartsWith("ar"))
-//                {
-//                    return "ar";
-//                }
-//            }
-
-//            // Default to Arabic for any other language
-//            return "ar";
-//        }
-//        // =================================================
-//        // Get All Products : 
-//        // =================================================
-//        [HttpGet]
-//        [ProducesResponseType(StatusCodes.Status200OK)]
-//        [ProducesResponseType(StatusCodes.Status404NotFound)]
-//        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllProductsAsync()
-//        {
-//            if (!ModelState.IsValid)
-//                return BadRequest(ModelState);
-//            try
-//            {
-//                var Products = await _service.GetAllProductsAsync();
-//                if (Products == null )
-//                {
-//                    return NotFound(new ApiResponse<IEnumerable<ProductDTO>>
-//                    {
-//                        Success = false,
-//                        Message = $" No Products found.",
-//                        Errors = ["Empty result"]
-//                    });
-
-//                }
-//                return Ok(new ApiResponse<IEnumerable<ProductDTO>>
-//                {
-//                    Success = true,
-//                    Message = " retrieved successfully",
-//                    Data = Products
-//                });
-//            }
-//            catch (Exception)
-//            {
-//                return StatusCode(500, "An error occurred while retrieving Products.");
-//            }
-//        }
-//        // =================================================
-//        // Get  Product By Id: 
-//        // =================================================
-
-//        [HttpGet("{id:int}")]
-//        [ProducesResponseType(StatusCodes.Status200OK)]
-//        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-//        [ProducesResponseType(StatusCodes.Status404NotFound)]
-//        public async Task<ActionResult<ProductDTO>> GetProductByIdAsync(int id)
-//        {
-//            if (!ModelState.IsValid)
-//                return BadRequest(ModelState);
-
-//            var result = await _service.GetProductByIdAsync(id);
-//            if (result == null)
-//            {
-//                return BadRequest(new ApiResponse<IEnumerable<ProductDTO>>
-//                {
-//                    Success = false,
-//                    Message = $" There is no Product With Id {id}",
-//                    Errors = ["Empty result"]
-//                });
-//            }
-
-//            return Ok(new ApiResponse<ProductDTO>
-//            {
-//                Success = true,
-//                Message = " retrieved successfully",
-//                Data = result
-//            });
-//        }
-
-//        // =================================================
-//        // Add New Product : 
-//        // =================================================
-//        [HttpPost]
-//        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-//        [ProducesResponseType(StatusCodes.Status201Created)]
-//        public async Task<ActionResult<ProductDTO>> AddNewProductAsync([FromBody] CreateProductDTO dto)
-//        {
-//            if (!ModelState.IsValid)
-//                return BadRequest(ModelState);
-//            // أولًا: التحقق من أن الكائن نفسه وبياناته الأساسية موجودة
-//            if (dto == null)
-//            {
-//                return BadRequest(new ApiResponse<IEnumerable<ProductDTO>>
-//                {
-//                    Success = false,
-//                    Message = $" Not Accepted: Product data is missing or Name is empty.",
-//                    Errors = ["Empty result"]
-//                });
-//            }
-//            //var PhoneNum = newDoctor.Phone.Trim().ToString();
-
-//            var NewProduct = await _service.CreateProductAsync(dto);
-//            if (NewProduct == null)
-//            {
-//                return BadRequest(new ApiResponse<IEnumerable<ProductDTO>>
-//                {
-//                    Success = false,
-//                    Message = $" Product Not Added",
-//                    Errors = ["Empty result"]
-//                });
-//            }
-//            return Ok(new ApiResponse<ProductDTO>
-//            {
-//                Success = true,
-//                Message = " Added successfully",
-//                Data = NewProduct
-//            });
-//        }
-
-
-//        // =================================================
-//        // Update Product By Id: 
-//        // =================================================
-
-//        [HttpPut]
-//        [ProducesResponseType(StatusCodes.Status200OK)]
-//        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-//        [ProducesResponseType(StatusCodes.Status404NotFound)]
-//        public async Task<ActionResult<string>> UpdateProductByIdAsync(int id, [FromBody] UpdateProductDTO dto)
-//        {
-//            if (!ModelState.IsValid)
-//                return BadRequest(ModelState);
-
-//            var result = await _service.UpdateProductAsync(dto);
-//            if (result !=null)
-//            {
-//                return BadRequest(new ApiResponse<IEnumerable<ProductDTO>>
-//                {
-//                    Success = false,
-//                    Message = $"Sorry Product Didnot Updated!!",
-//                    Errors = ["Empty result"]
-//                });
-//            }
-//            return Ok(new ApiResponse<ProductDTO>
-//            {
-//                Success = true,
-//                Message = " Product Updated Successfully",
-//                Data = result
-//            });
-//        }
-
-//        // =================================================
-//        // Delete Product By Id: 
-//        // =================================================
-//        //here we use HttpDelete method
-
-//        [HttpDelete("{id:int}")]
-//        [ProducesResponseType(StatusCodes.Status200OK)]
-//        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-//        [ProducesResponseType(StatusCodes.Status404NotFound)]
-//        public async Task<ActionResult<string>> DeleteProductByIdAsync(int id)
-//        {
-//            if (!ModelState.IsValid)
-//                return BadRequest(ModelState);
-
-//            var result = await _service.DeleteProductAsync(id);
-
-//            if (!result)
-//                return BadRequest(new ApiResponse<IEnumerable<ProductDTO>>
-//                {
-//                    Success = false,
-//                    Message = "Sorry Product Did not Delete! Please Try Again!!",
-//                    Errors = new List<string> { "Empty result" }
-//                });
-
-//            return Ok(new ApiResponse<ProductDTO>
-//            {
-//                Success = true,
-//                Message = $"Product With Id {id} Deleted Successfully",
-//                Data = null
-//            });
-//        }
-//    }
-//}

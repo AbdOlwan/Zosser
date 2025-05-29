@@ -65,12 +65,18 @@
   },
   {
     "ContainingType": "API_OnlineStore.Controllers.Product_Controllers.BrandController",
-    "Method": "GetAllBrandsAsync",
+    "Method": "GetAllBrands",
     "RelativePath": "api/v1/brands",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "culture",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.BrandDTO, BLL-OnlineStore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -101,8 +107,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Brand",
-        "Type": "BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.BrandDTO",
+        "Name": "createBrandDto",
+        "Type": "BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.CreateBrandDTO",
         "IsRequired": true
       }
     ],
@@ -129,21 +135,26 @@
   },
   {
     "ContainingType": "API_OnlineStore.Controllers.Product_Controllers.BrandController",
-    "Method": "UpdateBrandByIdAsync",
-    "RelativePath": "api/v1/brands",
-    "HttpMethod": "PUT",
+    "Method": "GetBrandByIdAsync",
+    "RelativePath": "api/v1/brands/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Brand",
-        "Type": "BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.BrandDTO",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "culture",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "System.String",
+        "Type": "BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.BrandDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -173,9 +184,9 @@
   },
   {
     "ContainingType": "API_OnlineStore.Controllers.Product_Controllers.BrandController",
-    "Method": "GetBrandByIdAsync",
+    "Method": "UpdateBrand",
     "RelativePath": "api/v1/brands/{id}",
-    "HttpMethod": "GET",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -183,37 +194,14 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "updateBrandDTO",
+        "Type": "BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.UpdateBrandDTO",
+        "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.BrandDTO",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "API_OnlineStore.Controllers.Product_Controllers.BrandController",
@@ -849,12 +837,18 @@
   },
   {
     "ContainingType": "API_OnlineStore.Controllers.Product_Controllers.CategoryController",
-    "Method": "GetAllCategorysAsync",
-    "RelativePath": "api/v1/categorys",
+    "Method": "GetAllCategorys",
+    "RelativePath": "api/v1/categories",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "culture",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.CategoryDTO, BLL-OnlineStore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
@@ -878,87 +872,34 @@
   },
   {
     "ContainingType": "API_OnlineStore.Controllers.Product_Controllers.CategoryController",
-    "Method": "AddNewCategoryAsync",
-    "RelativePath": "api/v1/categorys",
+    "Method": "CreateCategory",
+    "RelativePath": "api/v1/categories",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Category",
-        "Type": "BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.CategoryDTO",
+        "Name": "dto",
+        "Type": "BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.CreateCategoryDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
         "Type": "BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.CategoryDTO",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 201
-      }
-    ]
-  },
-  {
-    "ContainingType": "API_OnlineStore.Controllers.Product_Controllers.CategoryController",
-    "Method": "UpdateCategoryByIdAsync",
-    "RelativePath": "api/v1/categorys",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Category",
-        "Type": "BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.CategoryDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.String",
         "MediaTypes": [
           "text/plain",
           "application/json",
           "text/json"
         ],
         "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
       }
     ]
   },
   {
     "ContainingType": "API_OnlineStore.Controllers.Product_Controllers.CategoryController",
-    "Method": "GetCategoryByIdAsync",
-    "RelativePath": "api/v1/categorys/{id}",
+    "Method": "GetCategoryById",
+    "RelativePath": "api/v1/categories/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -967,6 +908,11 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "culture",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -978,31 +924,34 @@
           "text/json"
         ],
         "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 400
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 404
       }
     ]
   },
   {
     "ContainingType": "API_OnlineStore.Controllers.Product_Controllers.CategoryController",
+    "Method": "UpdateCategory",
+    "RelativePath": "api/v1/categories/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F.UpdateCategoryDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API_OnlineStore.Controllers.Product_Controllers.CategoryController",
     "Method": "DeleteCategoryByIdAsync",
-    "RelativePath": "api/v1/categorys/{id}",
+    "RelativePath": "api/v1/categories/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,

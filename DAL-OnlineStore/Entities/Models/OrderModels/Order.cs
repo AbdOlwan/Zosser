@@ -1,42 +1,4 @@
-﻿//using DAL_OnlineStore.Entities.Models.OrderModels;
-//using DAL_OnlineStore.Entities.Models.PaymentModels;
-//using DAL_OnlineStore.Entities.Models.People;
-//using DAL_OnlineStore.Entities.Models.ShipmentModels;
-//using System.ComponentModel.DataAnnotations;
-//using System.ComponentModel.DataAnnotations.Schema;
-
-
-//namespace DAL_OnlineStore.Entities.Models.OrderModels
-//{
-//    public class Order
-//    {
-//        public int OrderID { get; set; }
-//        public int CustomerID { get; set; }
-//        public int AddressID { get; set; }
-//        public DateTime OrderDate { get; set; }
-//        public int TotalAmount { get; set; }
-//        public OrderStatus OrderStatus { get; set; } = OrderStatus.Processing;
-
-
-//        public Customer? Customer { get; set; }
-//        public CustomerAddress? CustomerAddress { get; set; }
-//        public Payment? Payment { get; set; }
-//        public IList<OrderItem>? Items { get; set; } 
-//    }
-
-//    public enum OrderStatus
-//    {
-//        // ENUM('Pending','Processing','Shipped','Delivered','Cancelled','Refunded')	
-
-//        Pending=0,
-//        Processing =1,
-//        Shipped =2,
-//        Delivered =3,
-//        Cancelled =4,
-//        Refunded =5
-//    }
-//}
-
+﻿
 using DAL_OnlineStore.Entities.Models.OrderModels;
 using DAL_OnlineStore.Entities.Models.PaymentModels;
 using DAL_OnlineStore.Entities.Models.People;

@@ -1,4 +1,5 @@
 ﻿using DAL_OnlineStore.Entities.Models.ProductModels;
+using IdentityModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,13 @@ namespace DAL_OnlineStore.Configurations.EnititesConfig.ProductsConfig
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Category> builder)
         {
             builder.HasKey(a => a.CategoryID);
+
+            builder.Property(e => e.Slug).HasMaxLength(200);
+
+            builder.HasMany(c => c.Translations)
+                  .WithOne(t => t.Category)
+                  .HasForeignKey(t => t.CategoryID)
+                  .OnDelete(DeleteBehavior.Cascade);
         }
     }
 
@@ -21,11 +29,11 @@ namespace DAL_OnlineStore.Configurations.EnititesConfig.ProductsConfig
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.
             EntityTypeBuilder<CategoryTranslation> builder)
         {
-            builder.HasKey(a => a.Id);
+            builder.HasKey(e => e.Id);
+            builder.Property(e => e.Culture).HasMaxLength(10).IsRequired();
+            builder.Property(e => e.Category_Name).HasMaxLength(500).IsRequired();
 
-            builder.HasOne(B => B.category)
-                .WithMany(p => p.Translations)
-                .HasForeignKey(p => p.CategoryID);
+            builder.HasIndex(e => new { e.CategoryID, e.Culture }).IsUnique();
         }
     }
 }

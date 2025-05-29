@@ -15,8 +15,7 @@ namespace DAL_OnlineStore.Entities
         public List<string> Roles { get; set; } = new();
         public string Username { get; set; } = string.Empty;
         [Required]
-        [RegularExpression(@"^(010|011|012|015)[0-9]{8}$",
-         ErrorMessage = "الرجاء إدخال رقم هاتف مصري صالح مثلاً 01132563254")]
+        [RegularExpression(@"^(010|011|012|015)[0-9]{8}$", ErrorMessage = "الرجاء إدخال رقم هاتف مصري صالح مثلاً 01132563254")]
         public string PhoneNumber { get; set; } = null!;
         public string Message { get; set; } = string.Empty;
     }

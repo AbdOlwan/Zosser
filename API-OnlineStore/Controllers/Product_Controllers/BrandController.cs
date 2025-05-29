@@ -1,4 +1,5 @@
 ﻿using API_OnlineStore.Common;
+using API_OnlineStore.Helpers;
 using BLL_OnlineStore.DTOs.EntitiesDTOs.Cart_F;
 using BLL_OnlineStore.DTOs.EntitiesDTOs.People_F;
 using BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F;
@@ -25,40 +26,32 @@ namespace API_OnlineStore.Controllers.Product_Controllers
         // =================================================
         // Get All Brands : 
         // =================================================
+
+        /// <summary>
+        /// Get all Brands with culture-specific translations
+        /// </summary>
+        /// <param name="culture">Culture code (default: ar)</param>
+        /// <returns>List of Brands</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<BrandDTO>>> GetAllBrandsAsync()
+        public async Task<ActionResult<IEnumerable<BrandDTO>>> GetAllBrands([FromQuery] string culture = "ar")
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
             try
             {
-                var Brands = await _service.GetAllBrands();
-                if (Brands == null || Brands.Count == 0)
+                var Brands = await _service.GetAllBrands(culture);
+                if (Brands == null)
                 {
-                    return NotFound(new ApiResponse<IEnumerable<BrandDTO>>
-                    {
-                        Success = false,
-                        Message = $"No Brands found.",
-                        Errors = ["Empty result"]
-                    });
-
-
+                    return NotFound(new ApiResponse(400, "No Brands Found"));
                 }
-
-                return Ok(new ApiResponse<IEnumerable<BrandDTO>>
-                {
-                    Success = true,
-                    Message = " retrieved successfully",
-                    Data = Brands
-                });
+                return Ok(new ApiResponse(200, Brands));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while retrieving Brands.");
+                return StatusCode(500, new ApiResponse(500, $"An error occurred while retrieving Brands: {ex.Message}"));
             }
         }
+
         // =================================================
         // Get  Brand By Id: 
         // =================================================
@@ -67,101 +60,109 @@ namespace API_OnlineStore.Controllers.Product_Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<BrandDTO>> GetBrandByIdAsync(int id)
+        public async Task<ActionResult<BrandDTO>> GetBrandByIdAsync(int id, [FromQuery] string culture = "ar")
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(400, ModelState));
 
-            var result = await _service.GetBrandById(id);
-            if (result == null)
+            try
             {
-                return NotFound(new ApiResponse<IEnumerable<BrandDTO>>
-                {
-                    Success = false,
-                    Message = $"There is no Brand With Id {id}",
-                    Errors = ["Empty result"]
-                });
+                var result = await _service.GetBrandByIdAsync(id, culture);
+                if (result == null)
+                    return NotFound(new ApiResponse(404, $"Brand with ID {id} not found"));
+
+                return Ok(new ApiResponse(200, result));
             }
-
-            return Ok(new ApiResponse<BrandDTO>
+            catch (Exception ex)
             {
-                Success = true,
-                Message = " retrieved successfully",
-                Data = result
-            });
+                return StatusCode(500, new ApiResponse(500, $"An error occurred while retrieving the Brand: {ex.Message}"));
+            }
         }
+
         // =================================================
         // Add New Brand : 
         // =================================================
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<BrandDTO>> AddNewBrandAsync([FromBody] BrandDTO Brand)
+        public async Task<ActionResult<BrandDTO>> AddNewBrandAsync([FromBody] CreateBrandDTO createBrandDto)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            // أولًا: التحقق من أن الكائن نفسه وبياناته الأساسية موجودة
-            if (Brand == null || string.IsNullOrEmpty(Brand.Brand_Name))
-            {
-                return BadRequest(new ApiResponse<IEnumerable<BrandDTO>>
-                {
-                    Success = false,
-                    Message = $"Not Accepted: Brand data is missing or Name is empty.",
-                    Errors = ["Empty result"]
-                });
-            }
-            //var PhoneNum = newDoctor.Phone.Trim().ToString();
+                return BadRequest(new ApiResponse(400, ModelState));
 
-            var NewBrand = await _service.AddNewBrand(Brand);
-            if (NewBrand == null)
+            if (createBrandDto == null || string.IsNullOrWhiteSpace(createBrandDto.ArBrandName) || string.IsNullOrWhiteSpace(createBrandDto.EnBrandName))
             {
-                return BadRequest(new ApiResponse<IEnumerable<BrandDTO>>
-                {
-                    Success = false,
-                    Message = $"Brand Not Added",
-                    Errors = ["Empty result"]
-                });
+                return BadRequest(new ApiResponse(400, "Invalid input data"));
+
             }
-            return Ok(new ApiResponse<BrandDTO>
+
+            var newBrand = await _service.CreateBrandAsync(createBrandDto);
+            if (newBrand == null)
+            {
+                return BadRequest(new ApiResponse(400, "Operation failed"));
+;
+            }
+
+            return CreatedAtAction(nameof(GetBrandByIdAsync), new { id = newBrand.Brand_ID }, new ApiResponse<BrandDTO>
             {
                 Success = true,
-                Message = " retrieved successfully",
-                Data = NewBrand
+                Message = "Brand created successfully",
+                Data = newBrand
             });
         }
-
 
 
         // =================================================
         // Update Brand By Id: 
         // =================================================
 
-        [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<string>> UpdateBrandByIdAsync(BrandDTO Brand)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
 
-            var result = await _service.UpdateBrandById(Brand);
-            if (!result)
+        /// <summary>
+        /// Update an existing brand with translations
+        /// </summary>
+        /// <param name="id">Brand ID</param>
+        /// <param name="updateBrandDTO">Brand update data</param>
+        /// <returns>No content if successful</returns>
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateBrand(int id, [FromBody] UpdateBrandDTO updateBrandDTO)
+        {
+            if (id != updateBrandDTO.Brand_ID)
+                return BadRequest(new ApiResponse(400, "ID in the URL does not match the ID in the request body"));
+
+            if (!ModelState.IsValid)
+                return BadRequest(new ApiResponse(400, ModelState));
+
+            try
             {
-                return BadRequest(new ApiResponse<IEnumerable<BrandDTO>>
-                {
-                    Success = false,
-                    Message = $"Sorry Brand Didnot Updated!!",
-                    Errors = ["Empty result"]
-                });
+                // تحقق من وجود البراند
+                if (!await _service.BrandExistsAsync(id))
+                    return NotFound(new ApiResponse(404, $"Brand with ID {id} not found"));
+
+                // تحديث البراند
+                await _service.UpdateBrandAsync(updateBrandDTO);
+
+                return NoContent(); // 204 No Content
             }
-            return Ok(new ApiResponse<BrandDTO>
+            catch (KeyNotFoundException ex)
             {
-                Success = true,
-                Message = "Brand Updated Successfully",
-                Data = Brand
-            });
+                return NotFound(new ApiResponse(404, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(500, $"An error occurred while updating the brand: {ex.Message}"));
+            }
         }
+
+
+
+
+
+
+
+
+
+
 
 
         // =================================================
@@ -197,3 +198,78 @@ namespace API_OnlineStore.Controllers.Product_Controllers
 
     }
 }
+
+
+
+
+
+
+
+//[HttpPost]
+//[ProducesResponseType(StatusCodes.Status400BadRequest)]
+//[ProducesResponseType(StatusCodes.Status201Created)]
+//public async Task<ActionResult<BrandDTO>> AddNewBrandAsync([FromBody] BrandDTO Brand)
+//{
+//    if (!ModelState.IsValid)
+//        return BadRequest(ModelState);
+//    // أولًا: التحقق من أن الكائن نفسه وبياناته الأساسية موجودة
+//    if (Brand == null || string.IsNullOrEmpty(Brand.Brand_Name))
+//    {
+//        return BadRequest(new ApiResponse<IEnumerable<BrandDTO>>
+//        {
+//            Success = false,
+//            Message = $"Not Accepted: Brand data is missing or Name is empty.",
+//            Errors = ["Empty result"]
+//        });
+//    }
+//    //var PhoneNum = newDoctor.Phone.Trim().ToString();
+
+//    var NewBrand = await _service.AddNewBrand(Brand);
+//    if (NewBrand == null)
+//    {
+//        return BadRequest(new ApiResponse<IEnumerable<BrandDTO>>
+//        {
+//            Success = false,
+//            Message = $"Brand Not Added",
+//            Errors = ["Empty result"]
+//        });
+//    }
+//    return Ok(new ApiResponse<BrandDTO>
+//    {
+//        Success = true,
+//        Message = " retrieved successfully",
+//        Data = NewBrand
+//    });
+//}
+
+
+
+
+
+
+//[HttpPut]
+//[ProducesResponseType(StatusCodes.Status200OK)]
+//[ProducesResponseType(StatusCodes.Status400BadRequest)]
+//[ProducesResponseType(StatusCodes.Status404NotFound)]
+//public async Task<ActionResult<string>> UpdateBrandByIdAsync1(UpdateBrandDTO dto)
+//{
+//    if (!ModelState.IsValid)
+//        return BadRequest(ModelState);
+
+//    var result = await _service.UpdateBrandAsync(dto);
+//    if (!result)
+//    {
+//        return BadRequest(new ApiResponse<IEnumerable<BrandDTO>>
+//        {
+//            Success = false,
+//            Message = $"Sorry Brand Didnot Updated!!",
+//            Errors = ["Empty result"]
+//        });
+//    }
+//    return Ok(new ApiResponse<BrandDTO>
+//    {
+//        Success = true,
+//        Message = "Brand Updated Successfully",
+//        Data = Brand
+//    });
+//}

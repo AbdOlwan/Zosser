@@ -134,6 +134,16 @@
         "tags": [
           "Brand"
         ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "ar"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -194,17 +204,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BrandDTO"
+                "$ref": "#/components/schemas/CreateBrandDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/BrandDTO"
+                "$ref": "#/components/schemas/CreateBrandDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/BrandDTO"
+                "$ref": "#/components/schemas/CreateBrandDTO"
               }
             }
           }
@@ -251,47 +261,49 @@
             }
           }
         }
-      },
-      "put": {
+      }
+    },
+    "/api/v1/brands/{id}": {
+      "get": {
         "tags": [
           "Brand"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BrandDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BrandDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/BrandDTO"
-              }
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "culture",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "ar"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/BrandDTO"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/BrandDTO"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/BrandDTO"
                 }
               }
             }
@@ -337,10 +349,8 @@
             }
           }
         }
-      }
-    },
-    "/api/v1/brands/{id}": {
-      "get": {
+      },
+      "put": {
         "tags": [
           "Brand"
         ],
@@ -355,66 +365,28 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBrandDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBrandDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBrandDTO"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BrandDTO"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BrandDTO"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BrandDTO"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       },
@@ -1601,10 +1573,20 @@
         }
       }
     },
-    "/api/v1/categorys": {
+    "/api/v1/categories": {
       "get": {
         "tags": [
           "Category"
+        ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "ar"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -1666,44 +1648,72 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CategoryDTO"
+                "$ref": "#/components/schemas/CreateCategoryDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CategoryDTO"
+                "$ref": "#/components/schemas/CreateCategoryDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CategoryDTO"
+                "$ref": "#/components/schemas/CreateCategoryDTO"
               }
             }
           }
         },
         "responses": {
-          "400": {
-            "description": "Bad Request",
+          "200": {
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/CategoryDTO"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/CategoryDTO"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/CategoryDTO"
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/v1/categories/{id}": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
           },
-          "201": {
-            "description": "Created",
+          {
+            "name": "culture",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "ar"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1728,94 +1738,6 @@
         "tags": [
           "Category"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CategoryDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CategoryDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CategoryDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/categorys/{id}": {
-      "get": {
-        "tags": [
-          "Category"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -1827,66 +1749,28 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryDTO"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/CategoryDTO"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CategoryDTO"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CategoryDTO"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       },
@@ -5934,11 +5818,40 @@
             "type": "integer",
             "format": "int32"
           },
+          "slug": {
+            "type": "string",
+            "nullable": true
+          },
           "brand_Name": {
             "type": "string",
             "nullable": true
           },
-          "slug": {
+          "translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BrandTranslationDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BrandTranslationDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "brand_ID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "culture": {
+            "type": "string",
+            "nullable": true
+          },
+          "brand_Name": {
             "type": "string",
             "nullable": true
           }
@@ -6026,17 +5939,94 @@
       "CategoryDTO": {
         "type": "object",
         "properties": {
-          "categoryID": {
+          "categoryId": {
             "type": "integer",
             "format": "int32"
-          },
-          "category_Name": {
-            "type": "string",
-            "nullable": true
           },
           "slug": {
             "type": "string",
             "nullable": true
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CategoryTranslationDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CategoryTranslationDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "culture": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateBrandDTO": {
+        "required": [
+          "arBrandName",
+          "enBrandName",
+          "slug"
+        ],
+        "type": "object",
+        "properties": {
+          "slug": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "arBrandName": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "enBrandName": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateCategoryDTO": {
+        "required": [
+          "arCategoryName",
+          "enCategoryName",
+          "slug"
+        ],
+        "type": "object",
+        "properties": {
+          "slug": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "arCategoryName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "enCategoryName": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -6432,27 +6422,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "typeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "brand_ID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "categoryId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "productName": {
-            "type": "string",
-            "nullable": true
-          },
           "slug": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
             "type": "string",
             "nullable": true
           },
@@ -6472,17 +6442,36 @@
             "type": "integer",
             "format": "int32"
           },
+          "brand_Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "category_Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "typeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "productName": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
           "marketingSlogan": {
             "type": "string",
             "nullable": true
           },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
+          "imageUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6778,6 +6767,62 @@
           "typeName": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateBrandDTO": {
+        "required": [
+          "arBrandName",
+          "enBrandName",
+          "slug"
+        ],
+        "type": "object",
+        "properties": {
+          "brand_ID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "slug": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "arBrandName": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "enBrandName": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateCategoryDTO": {
+        "required": [
+          "arCategoryName",
+          "enCategoryName",
+          "slug"
+        ],
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "slug": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "arCategoryName": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "enCategoryName": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false

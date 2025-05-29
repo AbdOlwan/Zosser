@@ -3,6 +3,7 @@ using BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F;
 using BLL_OnlineStore.Interfaces;
 using BLL_OnlineStore.Interfaces.ProductBusServices;
 using DAL_OnlineStore.Entities.Models.ProductModels;
+using DAL_OnlineStore.Repositories.Implementations.ProductRepository;
 using DAL_OnlineStore.Repositories.Interfaces.ProductRepository;
 using System;
 using System.Collections.Generic;
@@ -18,58 +19,163 @@ namespace BLL_OnlineStore.Services.ProductBusServices
         private readonly IMapper _mapper;
         private readonly ICultureService _culture;
 
-
-        public CategoryServices
-            (ICategoryRepo repo,
-            IMapper maper,
-            ICultureService culture
-            )
+        public CategoryServices(
+            ICategoryRepo repo,
+            IMapper mapper, // تم تصحيح الإملاء
+            ICultureService culture)
         {
             _repo = repo;
-            _mapper = maper;
+            _mapper = mapper;
             _culture = culture;
         }
 
-        public async Task<List<CategoryDTO>?> GetAllCategorys()
+        public async Task<IEnumerable<CategoryDTO>> GetAllCategorys(string culture = "ar")
         {
-            var Categorys = await _repo.getAllCategorys();
-            if (Categorys == null)
+            var categories = await _repo.GetAllCategoriesWithTranslationsAsync(culture);
+            return _mapper.Map<IEnumerable<CategoryDTO>>(categories, opts =>
+            {
+                opts.Items["Culture"] = culture;
+            });
+        }
+
+        public async Task<CategoryDTO?> GetCategoryByIdAsync(int id, string culture = "ar")
+        {
+            var category = await _repo.GetCategoryByIdAsync(id, includeTranslations: true);
+            if (category == null)
                 return null;
 
-            return _mapper.Map<List<CategoryDTO>>(Categorys);
-        }
-
-        public async Task<CategoryDTO?> GetCategoryById(int CategoryId)
-        {
-            var Category = await _repo.getCategoryById(CategoryId);
-            if (Category == null) return null;
-            //var mapper = configMapper
-
-            return _mapper.Map<CategoryDTO>(Category);
-        }
-
-        public async Task<CategoryDTO?> AddNewCategory(CategoryDTO DTO)
-        {
-            var _Category = _mapper.Map<Category>(DTO);
-
-            var NewCategory = await _repo.addNewCategory(_Category);
-            if (NewCategory != null)
+            // إنشاء CategoryDTO جديد
+            var categoryDTO = new CategoryDTO
             {
-                return _mapper.Map<CategoryDTO?>(NewCategory);
-            }
-            return null;
-        }
-        public async Task<bool> UpdateCategoryById(CategoryDTO DTO)
-        {
-            if (DTO == null)
-                return false;
+                CategoryId = category.CategoryID,
+                Slug = category.Slug,
+                Translations = new List<CategoryTranslationDTO>()
+            };
 
-            var Category = _mapper.Map<Category>(DTO);
-            return await _repo.updateCategoryById(Category);
+            // التعامل مع الترجمات
+            if (category.Translations?.Any() == true)
+            {
+                // Map all translations
+                categoryDTO.Translations = category.Translations.Select(t => new CategoryTranslationDTO
+                {
+                    Id = t.Id,
+                    CategoryId = t.CategoryID,
+                    Culture = t.Culture,
+                    CategoryName = t.Category_Name
+                }).ToList();
+
+                // تحديد اسم الفئة حسب الثقافة المطلوبة
+                var currentTranslation = category.Translations
+                    .FirstOrDefault(t => t.Culture.ToLower() == culture.ToLower());
+
+                categoryDTO.CategoryName = currentTranslation?.Category_Name ??
+                    category.Translations.First().Category_Name; // fallback للترجمة الأولى
+            }
+            else
+            {
+                // لو مفيش ترجمات خالص
+                categoryDTO.CategoryName = string.Empty;
+            }
+
+            return categoryDTO;
         }
+
+        public async Task<CategoryDTO?> CreateCategoryAsync(CreateCategoryDTO createCategoryDTO)
+        {
+            try
+            {
+                // Map base Category data
+                var category = _mapper.Map<Category>(createCategoryDTO);
+
+                // Create translations for Arabic and English
+                category.Translations = new List<CategoryTranslation>
+                {
+                    new CategoryTranslation
+                    {
+                        Culture = "ar",
+                        Category_Name = createCategoryDTO.ArCategoryName
+                    },
+                    new CategoryTranslation
+                    {
+                        Culture = "en",
+                        Category_Name = createCategoryDTO.EnCategoryName
+                    }
+                };
+
+                // Save to database
+                var createdCategory = await _repo.AddCategoryAsync(category);
+
+                // Return the created category with default culture
+                return await GetCategoryByIdAsync(createdCategory.CategoryID, "ar");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                throw new InvalidOperationException("Error creating category", ex);
+            }
+        }
+
+        public async Task UpdateCategoryAsync(UpdateCategoryDTO updateCategoryDTO)
+        {
+            // Get existing Category with all translations
+            var category = await _repo.GetCategoryByIdAsync(updateCategoryDTO.CategoryId, includeTranslations: true);
+            if (category == null)
+                throw new KeyNotFoundException($"Category with ID {updateCategoryDTO.CategoryId} not found");
+
+            // Update base Category properties (slug, etc.)
+            category.Slug = updateCategoryDTO.Slug ?? category.Slug;
+
+            // تأكد إن الـ Translations مش null
+            category.Translations ??= new List<CategoryTranslation>();
+
+            // Update Arabic translation
+            var arTranslation = category.Translations.FirstOrDefault(t => t.Culture == "ar");
+            if (arTranslation != null)
+            {
+                arTranslation.Category_Name = updateCategoryDTO.ArCategoryName;
+            }
+            else
+            {
+                category.Translations.Add(new CategoryTranslation
+                {
+                    CategoryID = category.CategoryID,
+                    Culture = "ar",
+                    Category_Name = updateCategoryDTO.ArCategoryName
+                });
+            }
+
+            // Update English translation
+            var enTranslation = category.Translations.FirstOrDefault(t => t.Culture == "en");
+            if (enTranslation != null)
+            {
+                enTranslation.Category_Name = updateCategoryDTO.EnCategoryName;
+            }
+            else
+            {
+                category.Translations.Add(new CategoryTranslation
+                {
+                    CategoryID = category.CategoryID,
+                    Culture = "en",
+                    Category_Name = updateCategoryDTO.EnCategoryName
+                });
+            }
+
+            // Save changes
+            await _repo.UpdateCategoryAsync(category);
+        }
+
         public async Task<bool> DeleteCategoryById(int id)
         {
-            return await _repo.deleteCategoryById(id);
+            var exists = await _repo.CategoryExistsAsync(id);
+            if (!exists)
+                return false;
+
+            return await _repo.DeleteCategoryAsync(id);
+        }
+
+        public async Task<bool> CategoryExistsAsync(int id)
+        {
+            return await _repo.CategoryExistsAsync(id);
         }
     }
 }

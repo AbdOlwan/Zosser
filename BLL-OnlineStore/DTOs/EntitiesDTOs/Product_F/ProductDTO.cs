@@ -5,27 +5,25 @@ using System.ComponentModel.DataAnnotations;
 namespace BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F
 {
 
+
     public class ProductDTO
     {
         public int ProductId { get; set; }
-        public int TypeId { get; set; } // خاصية المفتاح الأجنبي
-        public int Brand_ID { get; set; }
-        public int CategoryId { get; set; }
-
-        public string ProductName { get; set; } = null!;
-        public string Slug { get; set; } = null!;       // https://g.co/gemini/share/e028c67fe505 For Example : classic-cotton-t-shirt-blue-m.
-        public string Description { get; set; } = null!;
-        public string Sku { get; set; } = null!;      // https://g.co/gemini/share/e028c67fe505 For Ex: NIKE-TR-MEN-BLU-M
+        public string Slug { get; set; } = null!;
+        public string Sku { get; set; } = null!;
         public decimal Price { get; set; }
         public decimal DiscountPrice { get; set; }
         public int QuantityInStock { get; set; }
-        public string MarketingSlogan { get; set; } = null!;// الخاصية الجديدة للوصف التسويقي
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+
+        public string Brand_Name { get; set; } = null!;
+        public string Category_Name { get; set; } = null!;
+        public string TypeName { get; set; } = null!;
+        public string ProductName { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public string MarketingSlogan { get; set; } = null!;
+        public List<string> ImageUrls { get; set; } = null!;
     }
 
-
-    // DTO for creating a new product
     public class CreateProductDTO
     {
         public int TypeId { get; set; }
@@ -154,6 +152,27 @@ namespace BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F
 
 
 
+//public class ProductDTO
+//{
+//    public int ProductId { get; set; }
+//    public int TypeId { get; set; } // خاصية المفتاح الأجنبي
+//    public int Brand_ID { get; set; }
+//    public int CategoryId { get; set; }
+
+//    public string ProductName { get; set; } = null!;
+//    public string Slug { get; set; } = null!;       // https://g.co/gemini/share/e028c67fe505 For Example : classic-cotton-t-shirt-blue-m.
+//    public string Description { get; set; } = null!;
+//    public string Sku { get; set; } = null!;      // https://g.co/gemini/share/e028c67fe505 For Ex: NIKE-TR-MEN-BLU-M
+//    public decimal Price { get; set; }
+//    public decimal DiscountPrice { get; set; }
+//    public int QuantityInStock { get; set; }
+//    public string MarketingSlogan { get; set; } = null!;// الخاصية الجديدة للوصف التسويقي
+//    public DateTime CreatedAt { get; set; }
+//    public DateTime UpdatedAt { get; set; }
+//}
+
+
+// DTO for creating a new product
 
 
 

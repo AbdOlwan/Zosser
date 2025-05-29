@@ -2,6 +2,8 @@
 using BLL_OnlineStore.Mapping;
 using DAL_OnlineStore.Configurations.Config;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +35,15 @@ builder.Services.AddSwaggerGen(options =>
     // options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
-
+// في Startup.cs أو Program.cs
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("ar");
+    options.SupportedCultures = new[] { new CultureInfo("ar"), new CultureInfo("en") };
+    options.SupportedUICultures = new[] { new CultureInfo("ar"), new CultureInfo("en") };
+    options.RequestCultureProviders.Clear();
+    options.RequestCultureProviders.Add(new QueryStringRequestCultureProvider());
+});
 
 
 var app = builder.Build();

@@ -503,7 +503,8 @@ namespace DAL_OnlineStore.Migrations
 
                     b.Property<string>("Slug")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("CategoryID");
 
@@ -523,15 +524,18 @@ namespace DAL_OnlineStore.Migrations
 
                     b.Property<string>("Category_Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Culture")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryID");
+                    b.HasIndex("CategoryID", "Culture")
+                        .IsUnique();
 
                     b.ToTable("CategoriesTranslations");
                 });
@@ -1237,13 +1241,13 @@ namespace DAL_OnlineStore.Migrations
 
             modelBuilder.Entity("DAL_OnlineStore.Entities.Models.ProductModels.CategoryTranslation", b =>
                 {
-                    b.HasOne("DAL_OnlineStore.Entities.Models.ProductModels.Category", "category")
+                    b.HasOne("DAL_OnlineStore.Entities.Models.ProductModels.Category", "Category")
                         .WithMany("Translations")
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("category");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("DAL_OnlineStore.Entities.Models.ProductModels.Product", b =>

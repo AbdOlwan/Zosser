@@ -10,15 +10,18 @@ namespace BLL_OnlineStore.Interfaces.ProductBusServices
 {
     public interface IBrandServices
     {
-        Task<List<BrandDTO>?> GetAllBrands();
-        Task<BrandDTO?> AddNewBrand(BrandDTO Brand);
+        Task<IEnumerable<BrandDTO>?> GetAllBrands(string culture = "ar");
+
 
         //Task<int> countBrands();
-
-        Task<BrandDTO?> GetBrandById(int id);
+        Task<BrandDTO?> CreateBrandAsync(CreateBrandDTO dto);
+        Task<BrandDTO?> GetBrandByIdAsync(int BrandId, string culture = "ar");
 
         Task<bool> DeleteBrandById(int id);
 
-        Task<bool> UpdateBrandById(BrandDTO Brand);
+        Task  UpdateBrandAsync(UpdateBrandDTO updateBrandDTO);
+
+        Task<bool> BrandExistsAsync(int id);
     }
 }
+//Task<BrandDTO?> AddNewBrand(BrandDTO Brand);

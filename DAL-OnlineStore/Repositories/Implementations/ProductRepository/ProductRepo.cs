@@ -25,8 +25,10 @@ namespace DAL_OnlineStore.Repositories
             culture = !string.IsNullOrEmpty(culture) ? culture : _defaultCulture;
 
             return await _context.Products
-                .Include(p => p.brand)
-                .Include(p => p.category)
+                .Include(p=>p.brand)
+                .Include(p => p.brand!).ThenInclude(B => B.BrandTranslations)
+                .Include(p=>p.category)
+                .Include(p => p.category!).ThenInclude(B => B.Translations)
                 .Include(p => p.type)
                 .Include(p => p.Images)
                 .Include(p => p.productTranslations.Where(pt => pt.Culture == culture))
@@ -41,7 +43,11 @@ namespace DAL_OnlineStore.Repositories
 
             return await _context.Products
                 .Include(p => p.brand)
+                .Include(p => p.brand!)
+                .ThenInclude(b => b.BrandTranslations)
                 .Include(p => p.category)
+                .Include(p => p.category!)
+                .ThenInclude(c => c.Translations)
                 .Include(p => p.type)
                 .Include(p => p.Images)
                 .Include(p => p.productSpecifications)
@@ -162,87 +168,3 @@ namespace DAL_OnlineStore.Repositories
     }
 }
 
-
-
-
-
-
-
-
-//using DAL_OnlineStore.Context;
-//using DAL_OnlineStore.Entities.Models;
-//using DAL_OnlineStore.Entities.Models.ProductModels;
-//using DAL_OnlineStore.Repositories.Interfaces.ProductRepository;
-//using Microsoft.EntityFrameworkCore;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-
-//namespace DAL_OnlineStore.Repositories.Implementations.ProductRepository
-//{
-//    public class ProductRepo : IProductRepo
-//    {
-//        private readonly AppDbContext _context;
-
-//        public ProductRepo(AppDbContext context)
-//        {
-//            _context = context;
-//        }
-
-//        public async Task<List<Product>?> getAllProducts()
-//        {
-//            return await _context.Products
-//                                    .AsNoTracking()
-//                                    .Include(P=>P.productTranslations
-//                                    .Where(t=>t.Culture == _context.CurrentCulture))
-//                                    .ToListAsync();
-//        }
-
-//        public async Task<Product?> getProductById(int Id)
-//        {
-//            return await _context.Products.AsNoTracking()
-//                                          .Include(P=>P.productTranslations
-//                                          .Where(t=>t.Culture == _context.CurrentCulture))
-//                                            .FirstOrDefaultAsync(a => a.ProductId == Id);
-//        }
-
-//        public async Task<Product> addNewProduct(Product product)
-//        {
-//            await _context.Products.AddAsync(product);
-//            await _context.SaveChangesAsync();
-//            return product;
-//        }
-//        public async Task<bool> deleteProductById(int id)
-//        {
-//            var Product = await _context.Products.FirstOrDefaultAsync(d => d.ProductId == id);
-//            if (Product == null)
-//            {
-//                return false;
-//            }
-
-//            _context.Products.Remove(Product);
-//            await _context.SaveChangesAsync();
-//            return true;
-//        }
-
-//        public async Task<Product?> updateProduct(Product product)
-//        {
-//            var result = await _context.Products.FirstOrDefaultAsync(d => d.ProductId == product.ProductId);
-//            if (result != null)
-//            {
-//                _context.Entry(result).CurrentValues.SetValues(product);
-
-//                await _context.SaveChangesAsync();
-//                return null;
-//            }
-//            return null;
-//        }
-
-//        public async Task<int> countProducts()
-//        {
-//            return await _context.Products.CountAsync();
-//        }
-//    }
-//}

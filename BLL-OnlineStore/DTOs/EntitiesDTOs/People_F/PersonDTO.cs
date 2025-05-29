@@ -18,7 +18,7 @@ namespace BLL_OnlineStore.DTOs.EntitiesDTOs.People_F
         public string? Email { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public char? Gender { get; set; }
+        public string? Gender { get; set; }
         public DateOnly? DateOfBirth { get; set; }
         public bool IsActive { get; set; } = true;
     }

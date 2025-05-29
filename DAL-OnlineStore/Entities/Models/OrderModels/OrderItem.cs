@@ -1,32 +1,4 @@
-﻿//using DAL_OnlineStore.Entities.Models.OrderModels;
-//using DAL_OnlineStore.Entities.Models.ProductModels;
-//using System;
-//using System.Collections.Generic;
-//using System.ComponentModel.DataAnnotations;
-//using System.ComponentModel.DataAnnotations.Schema;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-
-//namespace DAL_OnlineStore.Entities.Models.OrderModels
-//{
-//    public class OrderItem
-//    {
-//        public int OrderItemID { get; set; }
-//        public int OrderID { get; set; }
-//        public int ProductID { get; set; }
-
-//        public int Quantity { get; set; }
-//        public decimal UnitPrice { get; set; }
-
-//        public decimal Subtotal { get; set; }
-
-//        public Order? Order { get; set; }
-//        public Product?  product { get; set; }
-
-//    }
-//}
-
+﻿
 using DAL_OnlineStore.Entities.Models.OrderModels;
 using DAL_OnlineStore.Entities.Models.ProductModels;
 using System;

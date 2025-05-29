@@ -20,21 +20,21 @@ namespace DAL_OnlineStore.Repositories.Implementations.ProductRepository
             _context = context;
         }
 
-        public async Task<List<Brand>?> getAllBrands()
+        public async Task<IEnumerable<Brand>?> GetAllBrandsAsync()
         {
             return await _context.Brands
-                                    .AsNoTracking()
-                                    .Include(b=>b.BrandTranslations
-                                    .Where(t=>t.Culture == _context.CurrentCulture))
-                                    .ToListAsync();
+                            .Include(b=>b.BrandTranslations)
+                            .AsNoTracking()
+                            .ToListAsync();
         }
-
-        public async Task<Brand?> getBrandById(int BrandId)
+        public async Task<Brand?> getBrandById(int brandId, bool includeTranslations = false)
         {
-            return await _context.Brands.AsNoTracking()
-                                           .Include(b=>b.BrandTranslations
-                                           .Where(t=>t.Culture == _context.CurrentCulture))
-                                            .FirstOrDefaultAsync(a => a.Brand_ID == BrandId);
+            var query =_context.Brands.AsQueryable();
+            if (includeTranslations)
+            {
+                query= query.Include(b=> b.BrandTranslations);
+            }
+            return await query.FirstOrDefaultAsync(b => b.Brand_ID == brandId);
         }
 
         public async Task<Brand> addNewBrand(Brand Brand)
@@ -56,18 +56,28 @@ namespace DAL_OnlineStore.Repositories.Implementations.ProductRepository
             return true;
         }
 
-        public async Task<bool> updateBrandById(Brand Brand)
+        public async Task UpdateBrand(Brand brand)
         {
-            var result = await _context.Brands.FirstOrDefaultAsync(d => d.Brand_ID == Brand.Brand_ID);
-            if (result != null)
-            {
-                result.Brand_ID = Brand.Brand_ID;
-                _context.Entry(result).CurrentValues.SetValues(Brand);
+            // تحميل البراند مع الترجمات لو محتاجهم لاحقًا
+            var existingBrand = await _context.Brands
+                .Include(b => b.BrandTranslations)
+                .FirstOrDefaultAsync(b => b.Brand_ID == brand.Brand_ID);
 
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            return false;
+            if (existingBrand != null)
+                
+
+             // تحديث الخصائص الأساسية للبراند (بدون ID)
+             _context.Entry(existingBrand).CurrentValues.SetValues(brand);
+
+            // ملاحظة: لو فيه تعديلات على BrandTranslations، يتم التعامل معها بشكل منفصل هنا
+
+            await _context.SaveChangesAsync();
+           
+        }
+
+        public async Task<bool> BrandExistsAsync(int id)
+        {
+            return await _context.Brands.AnyAsync(b => b.Brand_ID == id);
         }
 
     }

@@ -120,7 +120,7 @@ namespace API_OnlineStore.Extensions
             services.AddScoped<ICultureService, CultureService>();
 
 
-            services.AddAutoMapper(typeof(Program));
+           // services.AddAutoMapper(typeof(Program));
 
             // تكوين إعدادات الـ JWT من ملف الإعدادات (appsettings.json)
             var jwtSettings = configuration.GetSection("JWT");

@@ -1,7 +1,9 @@
 ﻿using API_OnlineStore.Common;
+using API_OnlineStore.Helpers;
 using BLL_OnlineStore.DTOs.EntitiesDTOs.Cart_F;
 using BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F;
 using BLL_OnlineStore.Interfaces.ProductBusServices;
+using BLL_OnlineStore.Services.ProductBusServices;
 using DAL_OnlineStore.Entities.Models.CartModels;
 using DAL_OnlineStore.Entities.Models.ProductModels;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_OnlineStore.Controllers.Product_Controllers
 {
-    [Route("api/v1/categorys")]
+    [Route("api/v1/categories")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -24,70 +26,55 @@ namespace API_OnlineStore.Controllers.Product_Controllers
         // =================================================
         // Get All Categorys : 
         // =================================================
+
+        /// <summary>
+        /// Get all Categorys with culture-specific translations
+        /// </summary>
+        /// <param name="culture">Culture code (default: ar)</param>
+        /// <returns>List of Categorys</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetAllCategorysAsync()
+        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+        public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetAllCategorys([FromQuery] string culture = "ar")
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+
             try
             {
-                var Categorys = await _service.GetAllCategorys();
-                if (Categorys == null || Categorys.Count == 0)
-                {
-                    return NotFound(new ApiResponse<IEnumerable<CategoryDTO>>
-                    {
-                        Success = false,
-                        Message = $" No Categorys found.",
-                        Errors = ["Empty result"]
-                    });
-
-                }
-                return Ok(new ApiResponse<IEnumerable<CategoryDTO>>
-                {
-                    Success = true,
-                    Message = " retrieved successfully",
-                    Data = Categorys
-                });
-
+                var categories = await _service.GetAllCategorys(culture);
+                return Ok(new ApiResponse(200, categories));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while retrieving Categorys.");
-
+                return StatusCode(500, new ApiResponse(500, $"An error occurred while retrieving categories: {ex.Message}"));
             }
         }
+
         // =================================================
         // Get  Category By Id: 
         // =================================================
 
+
+        /// <summary>
+        /// Get a category by ID with culture-specific translations
+        /// </summary>
         [HttpGet("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<CategoryDTO>> GetCategoryByIdAsync(int id)
+        public async Task<ActionResult<CategoryDTO>> GetCategoryById(int id, [FromQuery] string culture = "ar")
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var result = await _service.GetCategoryById(id);
-            if (result == null)
+            try
             {
-                return BadRequest(new ApiResponse<IEnumerable<CategoryDTO>>
-                {
-                    Success = false,
-                    Message = $" There is no Category With Id {id}",
-                    Errors = ["Empty result"]
-                });
+                var category = await _service.GetCategoryByIdAsync(id, culture);
+
+                if (category == null)
+                    return NotFound(new ApiResponse(404, $"Category with ID {id} not found"));
+
+                return Ok(new ApiResponse(200, category));
+
             }
-
-            return Ok(new ApiResponse<CategoryDTO>
+            catch (Exception ex)
             {
-                Success = true,
-                Message = " retrieved successfully",
-                Data = result
-            });
+                return StatusCode(500, new ApiResponse(500, $"An error occurred while retrieving the category: {ex.Message}"));
+            }
         }
 
 
@@ -95,74 +82,66 @@ namespace API_OnlineStore.Controllers.Product_Controllers
         // =================================================
         // Add New Category : 
         // =================================================
+        /// <summary>
+        /// Create a new category with translations
+        /// </summary>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<CategoryDTO>> AddNewCategoryAsync([FromBody] CategoryDTO Category)
+        public async Task<ActionResult<CategoryDTO>> CreateCategory([FromBody] CreateCategoryDTO dto)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            // أولًا: التحقق من أن الكائن نفسه وبياناته الأساسية موجودة
-            if (Category == null || string.IsNullOrEmpty(Category.Category_Name))
-            {
-                return BadRequest(new ApiResponse<IEnumerable<CategoryDTO>>
-                {
-                    Success = false,
-                    Message = $" Not Accepted: Category data is missing or Name is empty.",
-                    Errors = ["Empty result"]
-                });
-            }
-            //var PhoneNum = newDoctor.Phone.Trim().ToString();
+                return BadRequest(new ApiResponse(400, ModelState));
 
-            var NewCategory = await _service.AddNewCategory(Category);
-            if (NewCategory == null)
+            try
             {
-                return BadRequest(new ApiResponse<IEnumerable<CategoryDTO>>
-                {
-                    Success = false,
-                    Message = $" Category Not Added",
-                    Errors = ["Empty result"]
-                });
+                if (string.IsNullOrWhiteSpace(dto.ArCategoryName))
+                    return BadRequest(new ApiResponse(400, "Arabic Category Name is required"));
+
+                if (string.IsNullOrWhiteSpace(dto.EnCategoryName))
+                    return BadRequest(new ApiResponse(400, "English Category Name is required"));
+
+                var createdCategory = await _service.CreateCategoryAsync(dto);
+
+                return CreatedAtAction(nameof(GetCategoryById), new { id = createdCategory?.CategoryId }, createdCategory);
             }
-            return Ok(new ApiResponse<CategoryDTO>
+            catch (Exception ex)
             {
-                Success = true,
-                Message = " retrieved successfully",
-                Data = NewCategory
-            });
+                return StatusCode(500, new ApiResponse(500, $"An error occurred while creating the category: {ex.Message}"));
+            }
         }
-
 
 
         // =================================================
         // Update Category By Id: 
         // =================================================
 
-        [HttpPut]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<string>> UpdateCategoryByIdAsync(CategoryDTO Category)
+        /// <summary>
+        /// Update an existing category with translations
+        /// </summary>
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateCategory(int id, [FromBody] UpdateCategoryDTO dto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            if (id != dto.CategoryId)
+                return BadRequest(new ApiResponse(400, "ID in the URL does not match the ID in the request body"));
 
-            var result = await _service.UpdateCategoryById(Category);
-            if (!result)
+            if (!ModelState.IsValid)
+                return BadRequest(new ApiResponse(400, ModelState));
+
+            try
             {
-                return BadRequest(new ApiResponse<IEnumerable<CategoryDTO>>
-                {
-                    Success = false,
-                    Message = $"Sorry Category Didnot Updated!!",
-                    Errors = ["Empty result"]
-                });
+                if (!await _service.CategoryExistsAsync(id))
+                    return NotFound(new ApiResponse(404, $"Category with ID {id} not found"));
+
+                await _service.UpdateCategoryAsync(dto);
+                return NoContent();
             }
-            return Ok(new ApiResponse<CategoryDTO>
+            catch (KeyNotFoundException ex)
             {
-                Success = true,
-                Message = " Category Updated Successfully",
-                Data = Category
-            });
+                return NotFound(new ApiResponse(404, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponse(500, $"An error occurred while updating the category: {ex.Message}"));
+            }
         }
 
 

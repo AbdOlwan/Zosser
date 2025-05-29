@@ -10,15 +10,17 @@ namespace DAL_OnlineStore.Repositories.Interfaces.ProductRepository
 {
     public interface IBrandRepo
     {
-        Task<List<Brand>?> getAllBrands();
+        Task<IEnumerable<Brand>?> GetAllBrandsAsync();
         Task<Brand> addNewBrand(Brand Brand);
 
         //Task<int> countBrands();
 
-        Task<Brand?> getBrandById(int id);
+        Task<Brand?> getBrandById(int brandId, bool includeTranslations = false);
 
         Task<bool> deleteBrandById(int id);
 
-        Task<bool> updateBrandById(Brand Brand);
+        Task UpdateBrand(Brand brand);
+
+        Task<bool> BrandExistsAsync(int id);
     }
 }

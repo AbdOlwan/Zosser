@@ -26,25 +26,11 @@ namespace BLL_OnlineStore.DTOs.UserDTOs
         public string? Email { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public char? Gender { get; set; }
+        public string? Gender { get; set; }
         public DateOnly? DateOfBirth { get; set; }
         public bool IsActive { get; set; } = true;
     }
 
-    //public class RegisterDTO
-    //{
-    //    public string UserName { get; set; }
-    //    public string Email { get; set; }
-    //    public string Password { get; set; }
-    //    public string FirstName { get; set; }
-    //    public string LastName { get; set; }
-    //    public string Phone { get; set; }
-    //    public bool Gender { get; set; }
-    //    public DateOnly DateOfBirth { get; set; }
-    //    public bool IsActive { get; set; }
-    //    public DateTime CreatedAt { get; set; }
-    //    // ... أي خصائص أخرى مطلوبة للتسجيل
-    //}
 
 
 }

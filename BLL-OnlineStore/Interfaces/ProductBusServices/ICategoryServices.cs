@@ -12,15 +12,17 @@ namespace BLL_OnlineStore.Interfaces.ProductBusServices
 {
     public interface ICategoryServices
     {
-        Task<List<CategoryDTO>?> GetAllCategorys();
-        Task<CategoryDTO?> AddNewCategory(CategoryDTO Category);
+        Task<IEnumerable<CategoryDTO>> GetAllCategorys(string culture = "ar");
+        Task<CategoryDTO?> CreateCategoryAsync(CreateCategoryDTO createCategoryDTO);
 
         //Task<int> countCategorys();
 
-        Task<CategoryDTO?> GetCategoryById(int id);
+        Task<CategoryDTO?> GetCategoryByIdAsync(int id, string culture = "ar");
 
         Task<bool> DeleteCategoryById(int id);
 
-        Task<bool> UpdateCategoryById(CategoryDTO Category);
+        Task UpdateCategoryAsync(UpdateCategoryDTO updateCategoryDTO);
+
+        Task<bool> CategoryExistsAsync(int id);
     }
 }
