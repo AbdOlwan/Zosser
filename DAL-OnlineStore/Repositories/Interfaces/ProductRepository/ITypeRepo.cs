@@ -20,5 +20,7 @@ namespace DAL_OnlineStore.Repositories.Interfaces.ProductRepository
         Task<bool> deleteTypeById(int id);
 
         Task<bool> updateTypeById(ProductType Type);
+
+        Task<bool> TypeExistsAsync(int id);
     }
 }

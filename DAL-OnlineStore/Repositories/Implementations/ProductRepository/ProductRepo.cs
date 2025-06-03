@@ -20,22 +20,39 @@ namespace DAL_OnlineStore.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Product>> GetAllProductsAsync(string culture)
+        public async Task<PagedResult<Product>> GetAllProductsAsync(string culture, int page, int limit)
         {
             culture = !string.IsNullOrEmpty(culture) ? culture : _defaultCulture;
 
-            return await _context.Products
-                .Include(p=>p.brand)
-                .Include(p => p.brand!).ThenInclude(B => B.BrandTranslations)
-                .Include(p=>p.category)
-                .Include(p => p.category!).ThenInclude(B => B.Translations)
+            var query = _context.Products
+                .Include(p => p.brand!)
+                    .ThenInclude(b => b.BrandTranslations)
+                .Include(p => p.category!)
+                    .ThenInclude(c => c.Translations)
                 .Include(p => p.type)
                 .Include(p => p.Images)
                 .Include(p => p.productTranslations.Where(pt => pt.Culture == culture))
-                .Where(p=>p.QuantityInStock >0)
-                .AsNoTracking()
+                .Where(p => p.QuantityInStock > 0)
+                .AsNoTracking();
+
+            var totalItems = await query.CountAsync();
+            var totalPages = (int)Math.Ceiling(totalItems / (double)limit);
+
+            var items = await query
+                .Skip((page - 1) * limit)
+                .Take(limit)
                 .ToListAsync();
+
+            return new PagedResult<Product>
+            {
+                Items = items,
+                TotalPages = totalPages,
+                CurrentPage = page,
+                PageSize = limit,
+                TotalItems = totalItems
+            };
         }
+
 
         public async Task<Product?> GetProductByIdAsync(int id, string? culture)
         {
@@ -69,44 +86,98 @@ namespace DAL_OnlineStore.Repositories
                 .FirstOrDefaultAsync(p => p.Slug == slug);
         }
 
-        public async Task<IEnumerable<Product>> GetProductsByCategoryIdAsync(int categoryId, string culture)
+        public async Task<PagedResult<Product>> GetProductsByCategoryIdAsync(int categoryId, string culture, int page, int limit)
         {
             culture = !string.IsNullOrEmpty(culture) ? culture : _defaultCulture;
 
-            return await _context.Products
-                .Where(p => p.CategoryId == categoryId)
-                .Include(p => p.brand)
+            var query = _context.Products
+                .Where(p => p.CategoryId == categoryId && p.QuantityInStock > 0)
+                .Include(p => p.brand!).ThenInclude(b=>b.BrandTranslations)
+                .Include(p=>p.category!).ThenInclude(c=>c.Translations)
+                .Include(p=>p.type!)
                 .Include(p => p.Images)
                 .Include(p => p.productTranslations.Where(pt => pt.Culture == culture))
-                .AsNoTracking()
+                .AsNoTracking();
+
+            var totalItems = await query.CountAsync();
+            var totalPages = (int)Math.Ceiling(totalItems / (double)limit);
+
+            var items = await query
+                .Skip((page - 1) * limit)
+                .Take(limit)
                 .ToListAsync();
+            return new PagedResult<Product>
+            {
+                Items = items,
+                TotalPages = totalPages,
+                CurrentPage = page,
+                PageSize = limit,            // ✅ هنا بتحدد عدد العناصر في كل صفحة
+                TotalItems = totalItems      // ✅ وهنا العدد الكلي لكل المنتجات
+            };
         }
 
-        public async Task<IEnumerable<Product>> GetProductsByBrandIdAsync(int brandId, string culture)
+
+        public async Task<PagedResult<Product>> GetProductsByBrandIdAsync(int brandId, string culture, int page, int limit)
         {
             culture = !string.IsNullOrEmpty(culture) ? culture : _defaultCulture;
 
-            return await _context.Products
-                .Where(p => p.Brand_ID == brandId)
-                .Include(p => p.category)
+            var query = _context.Products
+                .Where(p => p.Brand_ID == brandId && p.QuantityInStock > 0)
+                .Include(p => p.category!).ThenInclude(c=> c.Translations)  
+                .Include(p => p.type!)
+                .Include(p=>p.brand!).ThenInclude(b=>b.BrandTranslations)
                 .Include(p => p.Images)
                 .Include(p => p.productTranslations.Where(pt => pt.Culture == culture))
-                .AsNoTracking()
+                .AsNoTracking();
+
+            var totalCount = await query.CountAsync();
+            var totalPages = (int)Math.Ceiling(totalCount / (double)limit);
+
+            var items = await query
+                .Skip((page - 1) * limit)
+                .Take(limit)
                 .ToListAsync();
+            return new PagedResult<Product>
+            {
+                Items = items,
+                TotalPages = totalPages,
+                CurrentPage = page,
+                PageSize = limit,            // ✅ هنا بتحدد عدد العناصر في كل صفحة
+                TotalItems = totalCount      // ✅ وهنا العدد الكلي لكل المنتجات
+            };
+
         }
 
-        public async Task<IEnumerable<Product>> GetProductsByTypeIdAsync(int typeId, string culture)
+        public async Task<PagedResult<Product>> GetProductsByTypeIdAsync(int typeId, string culture, int page, int limit)
         {
             culture = !string.IsNullOrEmpty(culture) ? culture : _defaultCulture;
 
-            return await _context.Products
-                .Where(p => p.TypeId == typeId)
-                .Include(p => p.brand)
-                .Include(p => p.category)
+            var query =   _context.Products
+                .Where(p => p.TypeId == typeId && p.QuantityInStock > 0)
+                .Include(p => p.brand!).ThenInclude(b=>b.BrandTranslations)
+                .Include(p => p.category!).ThenInclude(c=>c.Translations)
+                .Include(p => p.type)
                 .Include(p => p.Images)
                 .Include(p => p.productTranslations.Where(pt => pt.Culture == culture))
-                .AsNoTracking()
+                .AsNoTracking();
+
+
+            var totalCount = await query.CountAsync();
+            var totalPages = (int)Math.Ceiling(totalCount / (double)limit);
+
+            var items = await query
+                .Skip((page - 1) * limit)
+                .Take(limit)
                 .ToListAsync();
+            return new PagedResult<Product>
+            {
+                Items = items,
+                TotalPages = totalPages,
+                CurrentPage = page,
+                PageSize = limit,            
+                TotalItems = totalCount      
+            };
+
         }
 
         public async Task<IEnumerable<Product>> FindProductsAsync(Expression<Func<Product, bool>> predicate, string culture)
@@ -166,5 +237,14 @@ namespace DAL_OnlineStore.Repositories
             return await _context.Products.AnyAsync(p => p.Slug == slug);
         }
     }
+    public class PagedResult<T>
+    {
+        public IEnumerable<T> Items { get; set; } = new List<T>();
+        public int TotalPages { get; set; }
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
+        public int TotalItems { get; set; }
+    }
+
 }
 

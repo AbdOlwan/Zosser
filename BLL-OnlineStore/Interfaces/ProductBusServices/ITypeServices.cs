@@ -19,5 +19,6 @@ namespace BLL_OnlineStore.Interfaces.ProductBusServices
         Task<bool> DeleteTypeById(int id);
 
         Task<bool> UpdateTypeById(TypeDTO Type);
+        Task<bool> TypeExistsAsync(int id);
     }
 }

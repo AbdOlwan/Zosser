@@ -65,5 +65,23 @@ namespace DAL_OnlineStore.Repositories.Implementations.ProductRepository
             return false;
         }
 
+        public async Task<bool> TypeExistsAsync(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                    return false;
+
+                return await _context.Types
+                    .AsNoTracking()
+                    .AnyAsync(c => c.TypeId == id);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Error checking type existence with ID: {id}", ex);
+            }
+        }
+
+
     }
 }

@@ -143,23 +143,6 @@ namespace BLL_OnlineStore.Services.ProductBusServices
 
     }
 
-     //public async Task<bool> UpdateBrandById(BrandDTO DTO)
-     //   {
-     //       if (DTO == null)
-     //           return false;
 
-     //       var Brand = _mapper.Map<Brand>(DTO);
-     //       return await _repo.updateBrandById(Brand);
-     //   }
     }
-//public async Task<BrandDTO?> AddNewBrand(BrandDTO DTO)
-//{
-//    var _Brand = _mapper.Map<Brand>(DTO);
 
-//    var NewBrand = await _repo.addNewBrand(_Brand);
-//    if (NewBrand != null)
-//    {
-//        return _mapper.Map<BrandDTO?>(NewBrand);
-//    }
-//    return null;
-//}

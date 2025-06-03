@@ -2,6 +2,7 @@
 using BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F;
 using BLL_OnlineStore.Services.Interfaces;
 using DAL_OnlineStore.Entities.Models.ProductModels;
+using DAL_OnlineStore.Repositories;
 using DAL_OnlineStore.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,33 +13,38 @@ namespace BLL_OnlineStore.Services
 {
     public class ProductService : IProductService
     {
-        private readonly IProductRepo _productRepo;
+        private readonly IProductRepo _repo;
         private readonly IMapper _mapper;
 
         public ProductService(IProductRepo productRepo, IMapper mapper)
         {
-            _productRepo = productRepo;
+            _repo = productRepo;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetAllProductsAsync(string culture = "ar")
+        public async Task<PagedResult<ProductDTO>> GetAllProductsAsync(string culture = "ar", int page = 1, int limit = 10)
         {
-            var products = await _productRepo.GetAllProductsAsync(culture);
+            var pagedProducts = await _repo.GetAllProductsAsync(culture, page, limit);
 
-            var context = new Dictionary<string, object>
-            {
-                { "Culture", culture }
-            };
-
-            return _mapper.Map<IEnumerable<ProductDTO>>(products, opts =>
+            var productDTOs = _mapper.Map<IEnumerable<ProductDTO>>(pagedProducts.Items, opts =>
             {
                 opts.Items["Culture"] = culture;
             });
+
+            return new PagedResult<ProductDTO>
+            {
+                Items = productDTOs,
+                TotalPages = pagedProducts.TotalPages,
+                CurrentPage = pagedProducts.CurrentPage,
+                PageSize = pagedProducts.PageSize,
+                TotalItems = pagedProducts.TotalItems
+            };
         }
+
 
         public async Task<ProductDTO?> GetProductByIdAsync(int id, string culture = "ar")
         {
-            var product = await _productRepo.GetProductByIdAsync(id, culture);
+            var product = await _repo.GetProductByIdAsync(id, culture);
             if (product == null)
                 return null;
 
@@ -50,7 +56,7 @@ namespace BLL_OnlineStore.Services
 
         public async Task<ProductDTO?> GetProductBySlugAsync(string slug, string culture = "ar")
         {
-            var product = await _productRepo.GetProductBySlugAsync(slug, culture);
+            var product = await _repo.GetProductBySlugAsync(slug, culture);
             if (product == null)
                 return null;
 
@@ -60,40 +66,70 @@ namespace BLL_OnlineStore.Services
             });
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetProductsByCategoryIdAsync(int categoryId, string culture = "ar")
+        public async Task<PagedResult<ProductDTO>> GetProductsByCategoryIdAsync(int categoryId, string culture = "ar", int page = 1, int limit = 10)
         {
-            var products = await _productRepo.GetProductsByCategoryIdAsync(categoryId, culture);
+            var result = await _repo.GetProductsByCategoryIdAsync(categoryId, culture, page, limit);
 
-            return _mapper.Map<IEnumerable<ProductDTO>>(products, opts =>
+            var mapped = _mapper.Map<IEnumerable<ProductDTO>>(result.Items, opts =>
             {
                 opts.Items["Culture"] = culture;
             });
+
+            return new PagedResult<ProductDTO>
+            {
+                Items = mapped,
+                TotalPages = result.TotalPages,
+                CurrentPage = result.CurrentPage,
+                PageSize = result.PageSize,         // ✅ انسخه من النتيجة الأصلية
+                TotalItems = result.TotalItems      // ✅ انسخه من النتيجة الأصلية
+            };
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetProductsByBrandIdAsync(int brandId, string culture = "ar")
-        {
-            var products = await _productRepo.GetProductsByBrandIdAsync(brandId, culture);
 
-            return _mapper.Map<IEnumerable<ProductDTO>>(products, opts =>
+        public async Task<PagedResult<ProductDTO>> GetProductsByBrandIdAsync(int brandId, string culture = "ar", int page = 1, int limit = 10)
+        {
+            var result = await _repo.GetProductsByBrandIdAsync(brandId, culture, page, limit);
+
+            var dtoItems = _mapper.Map<IEnumerable<ProductDTO>>(result.Items, opts =>
             {
                 opts.Items["Culture"] = culture;
             });
+
+            return new PagedResult<ProductDTO>
+            {
+                Items = dtoItems,
+                TotalPages = result.TotalPages,
+                CurrentPage = result.CurrentPage,
+                PageSize = result.PageSize,         // ✅ انسخه من النتيجة الأصلية
+                TotalItems = result.TotalItems      // ✅ انسخه من النتيجة الأصلية
+            };
+
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetProductsByTypeIdAsync(int typeId, string culture = "ar")
-        {
-            var products = await _productRepo.GetProductsByTypeIdAsync(typeId, culture);
 
-            return _mapper.Map<IEnumerable<ProductDTO>>(products, opts =>
+        public async Task<PagedResult<ProductDTO>> GetProductsByTypeIdAsync(int typeId, string culture = "ar", int page = 1, int limit = 10)
+        {
+            var result = await _repo.GetProductsByTypeIdAsync(typeId, culture, page, limit);
+
+            var items =  _mapper.Map<IEnumerable<ProductDTO>>(result.Items, opts =>
             {
                 opts.Items["Culture"] = culture;
             });
+
+            return new PagedResult<ProductDTO>
+            {
+                Items = items,
+                TotalPages = result.TotalPages,
+                CurrentPage = result.CurrentPage,
+                PageSize = result.PageSize,         
+                TotalItems = result.TotalItems      
+            };
         }
 
         public async Task<ProductWithTranslationsDTO?> GetProductWithTranslationsAsync(int id)
         {
             // Get product with all translations
-            var product = await _productRepo.GetProductByIdAsync(id, null);
+            var product = await _repo.GetProductByIdAsync(id, null);
             if (product == null)
                 return null;
 
@@ -131,7 +167,7 @@ namespace BLL_OnlineStore.Services
             };
 
             // Save to database
-            await _productRepo.AddProductAsync(product);
+            await _repo.AddProductAsync(product);
 
             // Return mapped DTO with default culture
             return await GetProductByIdAsync(product.ProductId);
@@ -140,7 +176,7 @@ namespace BLL_OnlineStore.Services
         public async Task UpdateProductAsync(UpdateProductDTO updateProductDTO)
         {
             // Get existing product with all translations
-            var product = await _productRepo.GetProductByIdAsync(updateProductDTO.ProductId, null);
+            var product = await _repo.GetProductByIdAsync(updateProductDTO.ProductId, null);
             if (product == null)
                 throw new KeyNotFoundException($"Product with ID {updateProductDTO.ProductId} not found");
 
@@ -186,22 +222,22 @@ namespace BLL_OnlineStore.Services
             }
 
             // Save changes
-            await _productRepo.UpdateProductAsync(product);
+            await _repo.UpdateProductAsync(product);
         }
 
         public async Task DeleteProductAsync(int id)
         {
-             await _productRepo.DeleteProductAsync(id);
+             await _repo.DeleteProductAsync(id);
         }
 
         public async Task<bool> ProductExistsAsync(int id)
         {
-            return await _productRepo.ProductExistsAsync(id);
+            return await _repo.ProductExistsAsync(id);
         }
 
         public async Task<bool> ProductExistsBySlugAsync(string slug)
         {
-            return await _productRepo.ProductExistsBySlugAsync(slug);
+            return await _repo.ProductExistsBySlugAsync(slug);
         }
     }
 }

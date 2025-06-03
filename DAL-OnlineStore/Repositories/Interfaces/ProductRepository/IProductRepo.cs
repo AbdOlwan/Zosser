@@ -10,12 +10,12 @@ namespace DAL_OnlineStore.Repositories.Interfaces
 {
     public interface IProductRepo
     {
-        Task<IEnumerable<Product>> GetAllProductsAsync(string culture);
+        Task<PagedResult<Product>> GetAllProductsAsync(string culture, int page, int limit);
         Task<Product?> GetProductByIdAsync(int id, string? culture);
         Task<Product?> GetProductBySlugAsync(string slug, string culture);
-        Task<IEnumerable<Product>> GetProductsByCategoryIdAsync(int categoryId, string culture);
-        Task<IEnumerable<Product>> GetProductsByBrandIdAsync(int brandId, string culture);
-        Task<IEnumerable<Product>> GetProductsByTypeIdAsync(int typeId, string culture);
+        Task<PagedResult<Product>> GetProductsByCategoryIdAsync(int categoryId, string culture, int page, int limit);
+        Task<PagedResult<Product>> GetProductsByBrandIdAsync(int brandId, string culture, int page, int limit);
+        Task<PagedResult<Product>> GetProductsByTypeIdAsync(int typeId, string culture, int page, int limit);
         Task<IEnumerable<Product>> FindProductsAsync(Expression<Func<Product, bool>> predicate, string culture);
         Task<Product> AddProductAsync(Product product);
         Task UpdateProductAsync(Product product);

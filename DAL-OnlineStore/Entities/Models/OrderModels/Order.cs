@@ -39,21 +39,14 @@ namespace DAL_OnlineStore.Entities.Models.OrderModels
             // ─── الحقول المالية ────────────────────────────────────────
             [Required, Column(TypeName = "decimal(18,2)")]
             public decimal SubtotalAmount { get; set; }
-
             [Column(TypeName = "decimal(18,2)")]
             public decimal TaxAmount { get; set; }
-
             [Column(TypeName = "decimal(18,2)")]
             public decimal ShippingAmount { get; set; }
-
             [Column(TypeName = "decimal(18,2)")]
             public decimal DiscountAmount { get; set; }
-
             [Required, Column(TypeName = "decimal(18,2)")]
             public decimal TotalAmount { get; set; }
-
-
-
             // ─── ملاحظات المستخدم والإدارة الداخلية ──────────────────
             public string? UserNotes { get; set; }
             public string? InternalNotes { get; set; }
@@ -62,10 +55,8 @@ namespace DAL_OnlineStore.Entities.Models.OrderModels
             [Required]
             public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
             public string? CreatedBy { get; set; }
-
             public DateTime? UpdatedAt { get; set; }
             public string? UpdatedBy { get; set; }
-
             public bool IsDeleted { get; set; } = false;
         }
 

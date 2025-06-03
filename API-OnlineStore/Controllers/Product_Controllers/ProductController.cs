@@ -1,6 +1,8 @@
 ﻿using API_OnlineStore.Common;
 using BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F;
+using BLL_OnlineStore.Interfaces.ProductBusServices;
 using BLL_OnlineStore.Services.Interfaces;
+using DAL_OnlineStore.Entities.Models.ProductModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_OnlineStore.Controllers
@@ -10,30 +12,54 @@ namespace API_OnlineStore.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _service;
+        private readonly ICategoryServices _categoryServices;
+        private readonly IBrandServices _brandServices;
+        private readonly ITypeServices _typeServices;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(
+            IProductService productService,
+            ICategoryServices categoryServices,
+            IBrandServices brandServices,
+            ITypeServices typeServices
+            )
         {
             _service = productService;
+            _categoryServices = categoryServices;
+            _brandServices = brandServices;
+            _typeServices = typeServices;
+        
         }
-
         /// <summary>
-        /// Get all products with culture-specific translations
+        /// Get all products with culture-specific translations and pagination
         /// </summary>
-        /// <param name="culture">Culture code (default: ar)</param>
-        /// <returns>List of products</returns>
+        /// <param name="culture">Culture code (e.g. ar, en)</param>
+        /// <param name="page">Page number (starts from 1)</param>
+        /// <param name="limit">Number of products per page</param>
+        /// <returns>Paged list of ProductDTOs wrapped in ApiResponse</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllProducts([FromQuery] string culture = "ar")
+        public async Task<IActionResult> GetAllProducts(
+            [FromQuery] string culture = "ar",
+            [FromQuery] int page = 1,
+            [FromQuery] int limit = 10)
         {
             try
             {
-                var products = await _service.GetAllProductsAsync(culture);
-                return Ok(new ApiResponse(200,  products));
+                if (page < 1 || limit < 1)
+                {
+                    return BadRequest(new ApiResponse(400, "Page and limit must be greater than 0."));
+                }
+
+                var pagedResult = await _service.GetAllProductsAsync(culture, page, limit);
+
+                return Ok(new ApiResponse(200, pagedResult));
             }
             catch (Exception ex)
             {
+                // Logging can be added here if needed
                 return StatusCode(500, new ApiResponse(500, $"An error occurred while retrieving products: {ex.Message}"));
             }
         }
+
 
         /// <summary>
         /// Get a product by ID with culture-specific translations
@@ -87,19 +113,33 @@ namespace API_OnlineStore.Controllers
         /// <param name="categoryId">Category ID</param>
         /// <param name="culture">Culture code (default: ar)</param>
         /// <returns>List of products</returns>
-        [HttpGet("category/{categoryId:int}")]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByCategory(int categoryId, [FromQuery] string culture = "ar")
+        //[HttpGet("category/{categoryId:int}")]
+        [HttpGet(template: "by-category/{categoryId:int}")]
+        public async Task<IActionResult> GetProductsByCategory(
+            [FromRoute] int categoryId,
+            [FromQuery] string culture = "ar",
+            [FromQuery] int page = 1,
+            [FromQuery] int limit = 10)
         {
             try
             {
-                var products = await _service.GetProductsByCategoryIdAsync(categoryId, culture);
-                return Ok(products);
+                if (page < 1 || limit < 1)
+                    return BadRequest(new ApiResponse(400, "Page and limit must be greater than 0."));
+
+                var categoryExists = await _categoryServices.CategoryExistsAsync(categoryId);
+                if (!categoryExists)
+                    return NotFound(new ApiResponse(404, $"Category with ID {categoryId} does not exist."));
+
+                var result = await _service.GetProductsByCategoryIdAsync(categoryId, culture, page, limit);
+
+                return Ok(new ApiResponse(200, result));
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new ApiResponse(500, $"An error occurred while retrieving products: {ex.Message}"));
+                return StatusCode(500, new ApiResponse(500, $"An error occurred: {ex.Message}"));
             }
         }
+
 
         /// <summary>
         /// Get products by brand ID with culture-specific translations
@@ -107,17 +147,28 @@ namespace API_OnlineStore.Controllers
         /// <param name="brandId">Brand ID</param>
         /// <param name="culture">Culture code (default: ar)</param>
         /// <returns>List of products</returns>
-        [HttpGet("brand/{brandId:int}")]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByBrand(int brandId, [FromQuery] string culture = "ar")
+        [HttpGet("by-brand/{brandId:int}")]
+        public async Task<ActionResult<ApiResponse>> GetProductsByBrand(
+            [FromRoute] int brandId,
+            [FromQuery] string culture = "ar",
+            [FromQuery] int page = 1,
+            [FromQuery] int limit = 10)
         {
             try
             {
-                var products = await _service.GetProductsByBrandIdAsync(brandId, culture);
-                return Ok(products);
+                if (page < 1 || limit < 1)
+                    return BadRequest(new ApiResponse(400, "Page and limit must be greater than 0."));
+
+                var brandExists = await _brandServices.BrandExistsAsync(brandId);
+                if (!brandExists)
+                    return NotFound(new ApiResponse(404, $"Brand with ID {brandId} does not exist."));
+
+                var products = await _service.GetProductsByBrandIdAsync(brandId, culture, page, limit);
+                return Ok(new ApiResponse(200, products));
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new ApiResponse(500, $"An error occurred while retrieving products: {ex.Message}"));
+                return StatusCode(500, new ApiResponse(500, $"An error occurred while retrieving products by brand: {ex.Message}"));
             }
         }
 
@@ -127,13 +178,24 @@ namespace API_OnlineStore.Controllers
         /// <param name="typeId">Type ID</param>
         /// <param name="culture">Culture code (default: ar)</param>
         /// <returns>List of products</returns>
-        [HttpGet("type/{typeId:int}")]
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByType(int typeId, [FromQuery] string culture = "ar")
+        [HttpGet("by-type/{typeId:int}")]
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByType(
+            [FromRoute] int typeId,
+            [FromQuery] string culture = "ar",
+            [FromQuery] int page = 1,
+            [FromQuery] int limit = 10)
         {
             try
             {
-                var products = await _service.GetProductsByTypeIdAsync(typeId, culture);
-                return Ok(products);
+                if (page < 1 || limit < 1)
+                    return BadRequest(new ApiResponse(400, "Page and limit must be greater than 0."));
+
+                var typeExists = await _typeServices.TypeExistsAsync(typeId);
+                if (!typeExists)
+                    return NotFound(new ApiResponse(404, $"Type with ID {typeId} does not exist."));
+
+                var results = await _service.GetProductsByTypeIdAsync(typeId, culture, page, limit);
+                return Ok(new ApiResponse(200, results));
             }
             catch (Exception ex)
             {

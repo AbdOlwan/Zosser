@@ -3,6 +3,7 @@ using BLL_OnlineStore.DTOs.EntitiesDTOs.Product_F;
 using BLL_OnlineStore.Interfaces.ProductBusServices;
 using DAL_OnlineStore.Entities.Models.ProductModels;
 using DAL_OnlineStore.Repositories.Interfaces.ProductRepository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,5 +65,11 @@ namespace BLL_OnlineStore.Services.ProductBusServices
         {
             return await _repo.deleteTypeById(id);
         }
+
+        public async Task<bool> TypeExistsAsync(int id)
+        {
+           return await _repo.TypeExistsAsync(id);
+        }
+
     }
 }
