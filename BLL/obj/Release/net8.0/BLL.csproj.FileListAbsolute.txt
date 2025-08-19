@@ -1,0 +1,17 @@
+D:\Work\Projects\Zosser\BLL\bin\Release\net8.0\BLL.deps.json
+D:\Work\Projects\Zosser\BLL\bin\Release\net8.0\BLL.dll
+D:\Work\Projects\Zosser\BLL\bin\Release\net8.0\BLL.pdb
+D:\Work\Projects\Zosser\BLL\bin\Release\net8.0\DAL.dll
+D:\Work\Projects\Zosser\BLL\bin\Release\net8.0\Shared.dll
+D:\Work\Projects\Zosser\BLL\bin\Release\net8.0\DAL.pdb
+D:\Work\Projects\Zosser\BLL\bin\Release\net8.0\Shared.pdb
+D:\Work\Projects\Zosser\BLL\obj\Release\net8.0\BLL.csproj.AssemblyReference.cache
+D:\Work\Projects\Zosser\BLL\obj\Release\net8.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Work\Projects\Zosser\BLL\obj\Release\net8.0\BLL.AssemblyInfoInputs.cache
+D:\Work\Projects\Zosser\BLL\obj\Release\net8.0\BLL.AssemblyInfo.cs
+D:\Work\Projects\Zosser\BLL\obj\Release\net8.0\BLL.csproj.CoreCompileInputs.cache
+D:\Work\Projects\Zosser\BLL\obj\Release\net8.0\BLL.csproj.Up2Date
+D:\Work\Projects\Zosser\BLL\obj\Release\net8.0\BLL.dll
+D:\Work\Projects\Zosser\BLL\obj\Release\net8.0\refint\BLL.dll
+D:\Work\Projects\Zosser\BLL\obj\Release\net8.0\BLL.pdb
+D:\Work\Projects\Zosser\BLL\obj\Release\net8.0\ref\BLL.dll
