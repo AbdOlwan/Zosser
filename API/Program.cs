@@ -10,7 +10,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigins",
         policy => policy
             // أضف النطاقات التي تريد السماح لها هنا
-            .WithOrigins("http://localhost:8080", "https://zosser-app.netlify.app", "http://localhost:5173")
+            .WithOrigins("http://localhost:8080", "https://zosser-app.netlify.app",
+                         "http://localhost:5173", "https://zosser-dashboard.netlify.app")
             .AllowAnyMethod()
             .AllowAnyHeader() // هذا هو الجزء الأهم لحل مشكلة الـ headers
             .AllowCredentials() // إذا كنت تستخدم cookies أو authentication headers

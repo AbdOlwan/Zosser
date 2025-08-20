@@ -10,3 +10,4 @@ D:\Work\Projects\Zosser\Shared\obj\Release\net8.0\Shared.dll
 D:\Work\Projects\Zosser\Shared\obj\Release\net8.0\refint\Shared.dll
 D:\Work\Projects\Zosser\Shared\obj\Release\net8.0\Shared.pdb
 D:\Work\Projects\Zosser\Shared\obj\Release\net8.0\ref\Shared.dll
+D:\Work\Projects\Zosser\Shared\obj\Release\net8.0\Shared.sourcelink.json
